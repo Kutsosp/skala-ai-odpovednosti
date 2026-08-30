@@ -36,11 +36,7 @@ Díky tomu se pak příjemci dokumentu mohou spravedlivě rozhodnout, na které 
 > 
 > – Kate Niederhoffer et al., [AI-Generated 'Workslop' Is Destroying Productivity](https://hbr.org/2025/09/ai-generated-workslop-is-destroying-productivity), Harvard Business Review (2025)
 
-According to Urban Dictionary:
 
-
->The epistemic status is a short disclaimer at the top of a post that explains how confident the author is in the contents of the post, how much reputation the author is willing to stake on it, what sorts of tests the thesis has passed.
-It should give a reader a sense of how seriously they should take the post.
 ## Purpose
 
 
@@ -122,6 +118,12 @@ Jelikož AI nemůže být odpovědné, neexistuje částečná odpovědnost auto
 
 
 ### Epistemic status / effort
+
+According to Urban Dictionary:
+
+
+>The epistemic status is a short disclaimer at the top of a post that explains how confident the author is in the contents of the post, how much reputation the author is willing to stake on it, what sorts of tests the thesis has passed.
+It should give a reader a sense of how seriously they should take the post.
 
 - [Epistemic Effort](https://www.lesswrong.com/posts/oDy27zfRf8uAbJR6M/epistemic-effort) (Raemon, LessWrong, 2016)
 - [Epistemic statuses are lazy, and that is a good thing](https://devonzuegel.com/epistemic-statuses-are-lazy-and-that-is-a-good-thing) (Devon Zuegel)
