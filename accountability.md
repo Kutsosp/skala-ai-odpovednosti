@@ -75,11 +75,10 @@ Odpovězení ANO na otázku znamená, že za dotčený aspekt díká autor **odp
 - Rozumíte každé větě a umíte jí říct vlastními slovy?
 
 **1 NÁSTŘEL -> 2 OVĚŘENO**  
-4. Znáte původ každého čísla?
 
-
-5. Souhlasíte s každým tvrzením?
-6. Souhlasíte s každým závěrem? Plynou závěry z tvrzení?
+- Znáte původ každého čísla?
+- Souhlasíte s každým tvrzením?
+- Souhlasíte s každým závěrem? Plynou závěry z tvrzení?
 
 **2 OVĚŘENO -> 3 PODEPSÁNO**  
 
