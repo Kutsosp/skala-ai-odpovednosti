@@ -37,7 +37,7 @@ Díky tomu se pak příjemci dokumentu mohou spravedlivě rozhodnout, na které 
 
 Jednu z nich napište velkými písmeny na první řádek dokumentu, e-mailu nebo zprávy:
 
-| # | Úroveň | Za co odpovídám | Použít když |
+| # | Úroveň | Za co odpovídám | Kdy použít |
 |---|---|---|---|
 | 0 | **PŘEPOSLÁNO** | Za nic. Neprováděl/a jsem zásadní změny nebo jsem to nečetl/a. | Příjemce nemá přístup k LLM nástrojům. V opačném případě si to mohl/a vygenerovat sám/a. |
 | 1 | **NÁSTŘEL** | Popsaný směr je relevantní. Každé větě rozumím a umím ji říct vlastními slovy. | Prosím o reakci na směr, ještě než se pustím do ladění detailů. |

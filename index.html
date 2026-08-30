@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Škála AI Odpovědnosti</title>
+<meta name="description" content="Systém úrovní autorské odpovědnosti za dokumenty vytvářené s LLM nástroji.">
+<link rel="stylesheet" href="reset.css">
+<link rel="stylesheet" href="index.css">
+<style>
+  /* Citations: left rule, muted attribution */
+  blockquote {
+    margin: var(--line-height) 0;
+    padding: 0 0 0 2ch;
+    border-left: var(--border-thickness) solid var(--text-color);
+  }
+  blockquote > :last-child { margin-bottom: 0; }
+  blockquote .attribution {
+    color: var(--text-color-alt);
+  }
+  /* Document status stamp */
+  .disclaimer {
+    border: var(--border-thickness) solid var(--text-color);
+    background: var(--background-color-alt);
+    padding: var(--line-height) 2ch;
+    margin: var(--line-height) 0;
+  }
+  .disclaimer p { margin: 0; }
+  ul.spaced > li { margin-bottom: var(--line-height); }
+  .disclaimer .stamp {
+    text-transform: uppercase;
+    font-weight: var(--font-weight-bold);
+    margin-right: 1ch;
+  }
+</style>
+</head>
+<body>
+
+<table class="header">
+  <tr>
+    <td colspan="2" rowspan="2" class="width-auto">
+      <h1 class="title">Škála AI Odpovědnosti</h1>
+      <span class="subtitle">Kolik odpovědnosti autor přebírá za&nbsp;dokument vytvořený s&nbsp;LLM nástroji</span>
+    </td>
+    <th>Verze</th>
+    <td class="width-min">v1.0</td>
+  </tr>
+  <tr>
+    <th>Aktualizováno</th>
+    <td class="width-min"><time style="white-space: pre;">30. 8. 2026</time></td>
+  </tr>
+  <tr>
+    <th class="width-min">Autor</th>
+    <td class="width-auto">Peter Kutsos</td>
+    <th class="width-min">Status</th>
+    <td>2&nbsp;OVĚŘENO</td>
+  </tr>
+</table>
+
+<div class="disclaimer">
+  <p><span class="stamp">2 OVĚŘENO</span> Znám původ každého čísla a&nbsp;souhlasím s&nbsp;každým tvrzením i&nbsp;závěrem. Prosím o&nbsp;reakci na tvrzení a&nbsp;argumenty, ještě než se pustím do ladění formulací, vzhledu a&nbsp;struktury.</p>
+</div>
+
+<p>Škála AI Odpovědnosti je systém, který si klade za cíl umožnit týmům efektivně začlenit LLM nástroje do jejich každodenní spolupráce. Umístěním dokumentu na škálu autor jasně a&nbsp;upřímně zhodnotí vlastní úsilí, které dokumentu věnoval, a&nbsp;komunikuje toto zhodnocení kolegům.</p>
+
+<p>Díky tomu se pak příjemci dokumentu mohou spravedlivě rozhodnout, na které části dokumentu podávat zpětnou vazbu a&nbsp;u&nbsp;kterých lze nejdřív očekávat úpravy od autora.</p>
+
+<h2>Citace</h2>
+
+<blockquote>
+  <p>For the longest time, writing was more expensive than reading. If you encountered a body of written text, you could be sure that at the very least, a human spent some time writing it down.</p>
+  <p class="attribution">– Alex Martsinovich, <a href="https://distantprovince.by/posts/its-rude-to-show-ai-output-to-people/">It's rude to show AI output to people</a> (via <a href="https://danny.is/notes/a-mini-rant-on-slop/">danny.is</a>)</p>
+</blockquote>
+
+<blockquote>
+  <p>I connect AI workslop to an older problem in workplace ethics: effort-withholding, as in shirking or slacking. Workslop is often perceived as continuous with these practices because it can shift burdens onto others while appearing to spare the sender effort.</p>
+  <p class="attribution">– Karl de Fine Licht, <a href="https://link.springer.com/article/10.1007/s13347-026-01164-8">AI Workslop: The Moral Significance of Withholding Effort</a>, Philosophy &amp; Technology (2026)</p>
+</blockquote>
+
+<blockquote>
+  <p>{...} workslop uniquely uses machines to offload cognitive work to another human being. When coworkers receive workslop, they are often required to take on the burden of decoding the content, inferring missed or false context. A cascade of effortful and complex decision-making processes may follow, including rework and uncomfortable exchanges with colleagues.</p>
+  <p class="attribution">– Kate Niederhoffer et al., <a href="https://hbr.org/2025/09/ai-generated-workslop-is-destroying-productivity">AI-Generated 'Workslop' Is Destroying Productivity</a>, Harvard Business Review (2025)</p>
+</blockquote>
+
+<blockquote>
+  <p>He created a situation where I had to decide whether I would rewrite it myself, make him [the sender] rewrite it, or just call it good enough.</p>
+  <p class="attribution">– Kate Niederhoffer et al., <a href="https://hbr.org/2025/09/ai-generated-workslop-is-destroying-productivity">AI-Generated 'Workslop' Is Destroying Productivity</a>, Harvard Business Review (2025)</p>
+</blockquote>
+
+<h2>Účel</h2>
+
+<ul class="spaced">
+  <li>Ujasnit, na jaký typ zpětné vazby jsou autor a&nbsp;dílo připraveni (hrubý návrh lze kritizovat za celkovou myšlenku, ale ještě ne za styl)</li>
+  <li>Předcházet informačním kaskádám</li>
+  <li>Zajistit odpovědnost na straně autora</li>
+  <li>Efektivně a&nbsp;upřímně komunikovat úsilí, které autor do díla vložil</li>
+  <li>Umožnit autorovi sdílet rané verze a&nbsp;dostávat k&nbsp;nim zpětnou vazbu bez plýtvání časem a&nbsp;zbytečně negativních reakcí</li>
+  <li>Dát čtenáři představu, na co se má při zpětné vazbě zaměřit a&nbsp;co autor teprve dokončí</li>
+</ul>
+
+<h2>Čtyři úrovně</h2>
+
+<p>Jednu z&nbsp;nich napište velkými písmeny na první řádek dokumentu, e-mailu nebo zprávy:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th class="width-min">#</th>
+      <th class="width-min">Úroveň</th>
+      <th>Za co odpovídám</th>
+      <th>Kdy použít</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td><strong>PŘEPOSLÁNO</strong></td>
+      <td>Za nic. Neprováděl/a jsem zásadní změny nebo jsem to nečetl/a.</td>
+      <td>Příjemce nemá přístup k&nbsp;LLM nástrojům. V&nbsp;opačném případě si to mohl/a vygenerovat sám/a.</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td><strong>NÁSTŘEL</strong></td>
+      <td>Popsaný směr je relevantní. Každé větě rozumím a&nbsp;umím ji říct vlastními slovy.</td>
+      <td>Prosím o&nbsp;reakci na směr, ještě než se pustím do ladění detailů.</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td><strong>OVĚŘENO</strong></td>
+      <td>Znám původ každého čísla a&nbsp;souhlasím s&nbsp;každým tvrzením i&nbsp;závěrem.</td>
+      <td>Prosím o&nbsp;reakci na tvrzení a&nbsp;argumenty, ještě než se pustím do ladění formulací, vzhledu a&nbsp;struktury.</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td><strong>PODEPSÁNO</strong></td>
+      <td>Za vzhled, strukturu i&nbsp;každou formulaci.</td>
+      <td>Pod dokument se podepisuji a&nbsp;považuji ho za hotový.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>K jaké úrovni odpovědnosti se zavázat?</h3>
+
+<p>Pro pokrok do další úrovně odpovědnosti je potřeba odpovědět ANO na každou otázku.</p>
+
+<p>Odpovězení ANO na otázku znamená, že za dotčený aspekt díla autor <strong>odpovídá</strong> a&nbsp;přijímá na něj zpětnou vazbu a&nbsp;kritiku.</p>
+
+<p><strong>0 PŘEPOSLÁNO → 1 NÁSTŘEL</strong></p>
+
+<div>
+  <label><input type="checkbox"> Přečetli jste vše?</label><br>
+  <label><input type="checkbox"> Je směr dokumentu relevantní?</label><br>
+  <label><input type="checkbox"> Rozumíte každé větě a&nbsp;umíte ji říct vlastními slovy?</label>
+</div>
+
+<p><strong>1 NÁSTŘEL → 2 OVĚŘENO</strong></p>
+
+<div>
+  <label><input type="checkbox"> Znáte původ každého čísla?</label><br>
+  <label><input type="checkbox"> Souhlasíte s&nbsp;každým tvrzením?</label><br>
+  <label><input type="checkbox"> Souhlasíte s&nbsp;každým závěrem? Plynou závěry z&nbsp;tvrzení?</label>
+</div>
+
+<p><strong>2 OVĚŘENO → 3 PODEPSÁNO</strong></p>
+
+<div>
+  <label><input type="checkbox"> Je každá věta formulovaná tak, jak byste ji formulovali sami?</label><br>
+  <label><input type="checkbox"> Je struktura dokumentu logická a&nbsp;srozumitelná?</label><br>
+  <label><input type="checkbox"> Je vzhled dokumentu reprezentativní?</label>
+</div>
+
+<p>Jelikož AI nemůže být odpovědné, neexistuje částečná odpovědnost autora. Pokud například autor zná původ jen některých čísel, dokument nemůže postoupit do stavu „<strong>OVĚŘENO</strong>“.</p>
+
+<h2>Zdroje a další čtení</h2>
+
+<h3>Workslop</h3>
+
+<p><strong>HBR (prio):</strong></p>
+<ul>
+  <li><a href="https://archive.is/20250923143154/https://hbr.org/2025/09/ai-generated-workslop-is-destroying-productivity">AI-Generated 'Workslop' Is Destroying Productivity</a> (HBR, 2025)</li>
+  <li><a href="https://archive.ph/20260320035918/https://hbr.org/2026/01/why-people-create-ai-workslop-and-how-to-stop-it">Why People Create AI Workslop and How to Stop It</a> (HBR, 2026)</li>
+</ul>
+
+<p><strong>Akademické:</strong></p>
+<ul>
+  <li><a href="https://link.springer.com/article/10.1007/s13347-026-01164-8">AI Workslop: The Moral Significance of Withholding Effort</a> (Philosophy &amp; Technology, Springer)</li>
+  <li><a href="https://osf.io/preprints/psyarxiv/5f78h_v1/">Workslop: Examining the prevalence, antecedents and consequences of low-quality AI-generated content at work</a> (OSF / PsyArXiv preprint, 2026)</li>
+</ul>
+
+<p><strong>Populární:</strong></p>
+<ul>
+  <li><a href="https://www.axios.com/2025/09/24/ai-workslop-workplace-efficiency-study">AI "workslop" is crushing workplace efficiency, study finds</a> (Axios)</li>
+  <li><a href="https://www.cnn.com/2025/09/26/business/ai-workslop-nightcap">AI isn't taking over your job, but 'workslop' is</a> (CNN Business)</li>
+  <li><a href="https://futurism.com/future-society/ai-productivity-research">AI at Work Is Creating Mountains of Slop That Humans Have to Fix, Stanford Research Finds</a> (Futurism)</li>
+</ul>
+
+<p><strong>Studie:</strong></p>
+<ul>
+  <li><a href="https://letsdatascience.com/blog/developers-thought-ai-made-them-faster-the-data-said-otherwise">AI Coding Tools Made Developers 19% Slower: METR Study</a> (Let's Data Science)</li>
+  <li><a href="https://daniel.haxx.se/blog/2025/07/14/death-by-a-thousand-slops/">Death by a thousand slops</a> (Daniel Stenberg, 2025)</li>
+</ul>
+
+<h3>Epistemický status a úsilí</h3>
+
+<p>Podle Urban Dictionary:</p>
+
+<blockquote>
+  <p>The epistemic status is a short disclaimer at the top of a post that explains how confident the author is in the contents of the post, how much reputation the author is willing to stake on it, what sorts of tests the thesis has passed. It should give a reader a sense of how seriously they should take the post.</p>
+</blockquote>
+
+<ul>
+  <li><a href="https://www.lesswrong.com/posts/oDy27zfRf8uAbJR6M/epistemic-effort">Epistemic Effort</a> (Raemon, LessWrong, 2016)</li>
+  <li><a href="https://devonzuegel.com/epistemic-statuses-are-lazy-and-that-is-a-good-thing">Epistemic statuses are lazy, and that is a good thing</a> (Devon Zuegel)</li>
+  <li><a href="https://www.webcitation.org/6DuYcqyQ3">Epistemic State</a> (muflax.com/episteme, původ konvence epistemic status; stabilní kopie: <a href="http://web.archive.org/web/20120606020834/http://muflax.com:80/episteme/">Wayback Machine</a>)</li>
+</ul>
+
+<h3>AI a odpovědnost</h3>
+
+<ul>
+  <li><a href="https://jarche.com/2023/06/the-button/">the button</a> (Harold Jarche, k&nbsp;textu Ethana Mollicka „The Button“)</li>
+  <li><a href="https://distantprovince.by/posts/its-rude-to-show-ai-output-to-people/">It's rude to show AI output to people</a> (Alex Martsinovich)</li>
+  <li><a href="https://unskilled.blog/posts/brandolinis-law-in-the-gpt-era/">Brandolini's Law in the GPT Era</a> (Unskilled)</li>
+</ul>
+
+<hr>
+
+<p style="color: var(--text-color-alt);">Styl: <a href="https://owickstrom.github.io/the-monospace-web/">The Monospace Web</a> (Oskar Wickström, MIT). Zdroj dokumentu: <a href="https://github.com/Kutsosp/skala-ai-odpovednosti">github.com/Kutsosp/skala-ai-odpovednosti</a>.</p>
+
+</body>
+</html>
