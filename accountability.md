@@ -70,21 +70,21 @@ Odpovězení ANO na otázku znamená, že za dotčený aspekt díká autor **odp
 
 **0 PŘEPOSLÁNO -> 1 NÁSTŘEL**  
 
-- Přečetli jste vše?
-- Je směr dokumentu relevantní?
-- Rozumíte každé větě a umíte jí říct vlastními slovy?
+- [ ] Přečetli jste vše?
+- [ ] Je směr dokumentu relevantní?
+- [ ] Rozumíte každé větě a umíte jí říct vlastními slovy?
 
 **1 NÁSTŘEL -> 2 OVĚŘENO**  
 
-- Znáte původ každého čísla?
-- Souhlasíte s každým tvrzením?
-- Souhlasíte s každým závěrem? Plynou závěry z tvrzení?
+- [ ] Znáte původ každého čísla?
+- [ ] Souhlasíte s každým tvrzením?
+- [ ] Souhlasíte s každým závěrem? Plynou závěry z tvrzení?
 
 **2 OVĚŘENO -> 3 PODEPSÁNO**  
 
-- Je každá věta formulovaná tak, jak byste jí formulovali sami?
-- Je struktura dokumentu logická a srozumitelná?
-- Je vzhled dokumentu reprezentativní? 
+- [ ] Je každá věta formulovaná tak, jak byste jí formulovali sami?
+- [ ] Je struktura dokumentu logická a srozumitelná?
+- [ ] Je vzhled dokumentu reprezentativní? 
 
 
 Jelikož AI nemůže být odpovědné, neexistuje částečná odpovědnost autora. Pokud například autor zná původ jen některých čísel, dokument nemůže postoupit to stavu  '**OVĚŘENO**'
