@@ -27,6 +27,9 @@
   }
   .disclaimer p { margin: 0; }
   ul.spaced > li { margin-bottom: var(--line-height); }
+  h2 { margin-top: calc(3 * var(--line-height)); }
+  h3 { margin-top: calc(2 * var(--line-height)); }
+  figure.diagram { margin: var(--line-height) 0; overflow-x: auto; }
   .disclaimer .stamp {
     text-transform: uppercase;
     font-weight: var(--font-weight-bold);
@@ -65,7 +68,21 @@
 
 <p>Díky tomu se pak příjemci dokumentu mohou spravedlivě rozhodnout, na které části dokumentu podávat zpětnou vazbu a&nbsp;u&nbsp;kterých lze nejdřív očekávat úpravy od autora.</p>
 
-<h2>Citace</h2>
+<h2>Obsah</h2>
+
+<nav>
+  <ul>
+    <li><a href="#citace">Citace</a></li>
+    <li><a href="#ucel">Účel</a></li>
+    <li><a href="#urovne">Čtyři úrovně</a></li>
+    <li><a href="#zavazek">K jaké úrovni odpovědnosti se zavázat?</a></li>
+    <li><a href="#zdroje">Zdroje a další čtení</a></li>
+  </ul>
+</nav>
+
+<hr>
+
+<h2 id="citace">Citace</h2>
 
 <blockquote>
   <p>For the longest time, writing was more expensive than reading. If you encountered a body of written text, you could be sure that at the very least, a human spent some time writing it down.</p>
@@ -87,7 +104,9 @@
   <p class="attribution">– Kate Niederhoffer et al., <a href="https://hbr.org/2025/09/ai-generated-workslop-is-destroying-productivity">AI-Generated 'Workslop' Is Destroying Productivity</a>, Harvard Business Review (2025)</p>
 </blockquote>
 
-<h2>Účel</h2>
+<hr>
+
+<h2 id="ucel">Účel</h2>
 
 <ul class="spaced">
   <li>Ujasnit, na jaký typ zpětné vazby jsou autor a&nbsp;dílo připraveni (hrubý návrh lze kritizovat za celkovou myšlenku, ale ještě ne za styl)</li>
@@ -98,7 +117,9 @@
   <li>Dát čtenáři představu, na co se má při zpětné vazbě zaměřit a&nbsp;co autor teprve dokončí</li>
 </ul>
 
-<h2>Čtyři úrovně</h2>
+<hr>
+
+<h2 id="urovne">Čtyři úrovně</h2>
 
 <p>Jednu z&nbsp;nich napište velkými písmeny na první řádek dokumentu, e-mailu nebo zprávy:</p>
 
@@ -139,7 +160,39 @@
   </tbody>
 </table>
 
-<h3>K jaké úrovni odpovědnosti se zavázat?</h3>
+<h2 id="zavazek">K jaké úrovni odpovědnosti se zavázat?</h2>
+
+<figure class="diagram">
+<pre>
+┌────────────────┐
+│ 0 PŘEPOSLÁNO   │  odpovídám: za nic
+└───────┬────────┘
+        │  ANO na:
+        │   1. Přečetli jste vše?
+        │   2. Je směr relevantní?
+        │   3. Umíte každou větu říct vlastními slovy?
+        ▼
+┌────────────────┐
+│ 1 NÁSTŘEL      │  odpovídám: za směr
+└───────┬────────┘
+        │  ANO na:
+        │   4. Znáte původ každého čísla?
+        │   5. Souhlasíte s každým tvrzením?
+        │   6. Plynou závěry z tvrzení?
+        ▼
+┌────────────────┐
+│ 2 OVĚŘENO      │  odpovídám: za čísla, tvrzení a závěry
+└───────┬────────┘
+        │  ANO na:
+        │   7. Je každá formulace jako vaše vlastní?
+        │   8. Plyne struktura logicky a srozumitelně?
+        │   9. Je vzhled reprezentativní?
+        ▼
+┌────────────────┐
+│ 3 PODEPSÁNO    │  odpovídám: za vše, pod dokument se podepisuji
+└────────────────┘
+</pre>
+</figure>
 
 <p>Pro pokrok do další úrovně odpovědnosti je potřeba odpovědět ANO na každou otázku.</p>
 
@@ -171,7 +224,9 @@
 
 <p>Jelikož AI nemůže být odpovědné, neexistuje částečná odpovědnost autora. Pokud například autor zná původ jen některých čísel, dokument nemůže postoupit do stavu „<strong>OVĚŘENO</strong>“.</p>
 
-<h2>Zdroje a další čtení</h2>
+<hr>
+
+<h2 id="zdroje">Zdroje a další čtení</h2>
 
 <h3>Workslop</h3>
 
