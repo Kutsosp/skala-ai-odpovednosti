@@ -3,6 +3,8 @@
 
 
 
+> **2 OVĚŘENO** – Znám původ každého čísla a souhlasím s každým tvrzením i závěrem. Prosím o reakci na tvrzení a argumenty ještě než se pustím do ladění formulací, vzhledu a struktury.
+
 # Škála AI Odpovědnosti
 
 
