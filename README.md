@@ -3,7 +3,10 @@
   <img alt="Škála AI Odpovědnosti – Kolik odpovědnosti autor přebírá za dokument vytvořený s LLM nástroji" src="assets/title.svg" width="100%">
 </picture>
 
-<a href="https://kutsosp.github.io/skala-ai-odpovednosti/uroven/2-overeno.html"><img alt="2 OVĚŘENO – Znám původ každého čísla a souhlasím s každým tvrzením i závěrem. Prosím o reakci na tvrzení a argumenty, ještě než se pustím do ladění formulací, vzhledu a struktury." src="badges/cs/2-overeno-full.svg" width="618"></a>
+<a href="https://kutsosp.github.io/skala-ai-odpovednosti/uroven/2-overeno.html"><picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/stamp-dark.svg">
+  <img alt="2 OVĚŘENO – Znám původ každého čísla a souhlasím s každým tvrzením i závěrem. Prosím o reakci na tvrzení a argumenty, ještě než se pustím do ladění formulací, vzhledu a struktury." src="assets/stamp.svg" width="100%">
+</picture></a>
 
 [![build](https://img.shields.io/github/actions/workflow/status/Kutsosp/skala-ai-odpovednosti/ci.yml?branch=main&style=flat-square&label=build)](https://github.com/Kutsosp/skala-ai-odpovednosti/actions/workflows/ci.yml)
 [![web](https://img.shields.io/github/deployments/Kutsosp/skala-ai-odpovednosti/github-pages?style=flat-square&label=web)](https://kutsosp.github.io/skala-ai-odpovednosti/)
