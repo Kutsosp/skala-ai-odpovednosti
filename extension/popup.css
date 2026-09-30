@@ -3,6 +3,9 @@ html, body { width: 46ch; }
 body { padding: var(--line-height) 2ch; }
 /* Postranní panel Google má pevnou šířku 300px a dialog na webu na telefonu také méně než 46ch */
 :root:has(> body[data-host="addon"]), body[data-host="addon"] { width: 100%; }
+/* Panel v nabídce Google Docs: menší písmo, aby seděl k rozhraní Docs */
+:root:has(> body[data-host="docs"]) { font-size: 13px; width: 100%; }
+body[data-host="docs"] { width: 100%; }
 @media screen and (max-width: 480px) { html, body { width: 100%; } }
 
 h1.title { font-size: 1rem; line-height: var(--line-height); margin-bottom: 0; }

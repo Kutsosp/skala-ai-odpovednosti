@@ -8,6 +8,7 @@ import { runScript } from "./google.js";
 //  addon     – postranní panel doplňku Google Docs/Sheets/Slides: vkládá přes google.script.run
 const query = new URLSearchParams(location.search);
 const HOST = query.get("host") || document.body.dataset.host || "extension";
+document.body.dataset.host = HOST; // pro CSS (popup.css)
 const $ = (id) => document.getElementById(id);
 let scale, ui, questions; // aktuální jazyk
 let index = 0;

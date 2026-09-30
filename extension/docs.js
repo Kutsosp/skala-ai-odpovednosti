@@ -24,11 +24,11 @@ function togglePanel(anchor) {
   frame.title = LABEL;
   frame.allow = "clipboard-write";
   const r = anchor.getBoundingClientRect();
-  const width = Math.min(480, window.innerWidth - 16);
+  const width = Math.min(400, window.innerWidth - 16);
   const left = Math.max(8, Math.min(r.left, window.innerWidth - width - 8));
   Object.assign(frame.style, {
     position: "fixed", top: `${r.bottom + 4}px`, left: `${left}px`, width: `${width}px`,
-    height: `${Math.min(760, window.innerHeight - r.bottom - 16)}px`,
+    height: `${Math.min(620, window.innerHeight - r.bottom - 16)}px`,
     border: "2px solid #000", background: "#fff", zIndex: 2147483647, boxShadow: "0 8px 24px rgba(0,0,0,.3)",
   });
   document.body.append(frame);
@@ -54,7 +54,9 @@ function injectMenu() {
   item.textContent = LABEL;
   item.setAttribute("role", "menuitem");
   item.setAttribute("aria-haspopup", "true");
-  item.classList.remove("goog-control-hover", "goog-control-open", "goog-control-focused");
+  // Šablona může být v okamžiku klonování ještě zakázaná (dokument se načítá); stavové třídy pryč.
+  item.classList.remove("goog-control-disabled", "goog-control-hover", "goog-control-open", "goog-control-focused", "goog-control-active");
+  item.removeAttribute("aria-disabled");
   // Stavy najetí a otevření řídí u Googlu jejich skript; klon není registrovaný, tak je řídíme sami.
   item.addEventListener("mouseenter", () => item.classList.add("goog-control-hover"));
   item.addEventListener("mouseleave", () => item.classList.remove("goog-control-hover"));
