@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Škála AI Odpovědnosti",
+  "version": "1.0.0",
+  "description": "Odpovězte na devět otázek, zjistěte úroveň odpovědnosti za svůj dokument a vložte odznak do Google Docs, e-mailu nebo zprávy.",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Škála AI Odpovědnosti",
+    "default_icon": { "16": "icons/icon16.png", "48": "icons/icon48.png", "128": "icons/icon128.png" }
+  },
+  "icons": { "16": "icons/icon16.png", "48": "icons/icon48.png", "128": "icons/icon128.png" },
+  "permissions": ["clipboardWrite"]
+}

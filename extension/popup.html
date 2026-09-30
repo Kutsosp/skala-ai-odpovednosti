@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<title>Škála AI Odpovědnosti</title>
+<link rel="stylesheet" href="reset.css">
+<link rel="stylesheet" href="index.css">
+<link rel="stylesheet" href="popup.css">
+</head>
+<body>
+
+<table class="header">
+  <tr>
+    <td class="width-auto">
+      <h1 class="title">Škála AI Odpovědnosti</h1>
+      <span class="subtitle">Jakou odpovědnost přebírám za tento dokument?</span>
+    </td>
+    <th class="width-min">Škála</th>
+    <td class="width-min">v1.0</td>
+  </tr>
+</table>
+
+<section id="quiz">
+  <p class="meta"><span id="step"></span> · <span id="transition"></span></p>
+  <h2 id="question"></h2>
+  <div class="grid">
+    <button id="yes" title="Klávesa A">Ano</button>
+    <button id="no" title="Klávesa N">Ne</button>
+  </div>
+  <p class="meta">Odpověď ANO znamená, že za daný aspekt dokumentu <strong>odpovídáte</strong> a přijímáte na něj zpětnou vazbu i kritiku.</p>
+</section>
+
+<section id="result" hidden>
+  <p class="meta">Váš dokument je na úrovni</p>
+  <p><img id="badge" alt=""></p>
+  <div class="disclaimer"><p><span class="stamp" id="stamp"></span><span id="full-text"></span></p></div>
+
+  <p class="meta">Kopírovat do schránky jako</p>
+  <div class="grid">
+    <button id="copy-minimal" title="Malý rámeček s názvem úrovně jako obrázek s odkazem">Odznak</button>
+    <button id="copy-full" title="Razítko s textem odpovědnosti jako text, který se přizpůsobí šířce dokumentu">Razítko</button>
+    <button id="copy-text" title="Prostý text bez formátování">Text</button>
+  </div>
+  <p class="meta">Vložte pomocí ⌘V / Ctrl+V na první řádek dokumentu, e-mailu nebo zprávy. Odznak zůstane viditelný pro každého a po kliknutí otevře vysvětlení škály.</p>
+  <p><a href="#" id="restart">Začít znovu</a></p>
+</section>
+
+<hr>
+<p class="meta">Podle <a href="https://kutsosp.github.io/skala-ai-odpovednosti/" target="_blank" rel="noopener">Škály AI Odpovědnosti</a> (Peter Kutsos). Styl: <a href="https://owickstrom.github.io/the-monospace-web/" target="_blank" rel="noopener">The Monospace Web</a>.</p>
+
+<script type="module" src="popup.js"></script>
+</body>
+</html>
