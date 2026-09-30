@@ -85,10 +85,12 @@ def minimal_svg(n, name):
     return svg(MIN_W, MIN_H, f"{label} – Škála AI Odpovědnosti", "#fff", f'<path d="{path}" fill="#000"/>\n')
 
 
-def full_svg(n, name, responsibility, when):
+def full_svg(n, name, responsibility, when, cols=FULL_COLS, dark=False):
     """Razítko jako .disclaimer na webu: tučný název, dvě mezery, text; zalomení po slovech na FULL_COLS znaků."""
     label = f"{n} {name}"
-    lines = textwrap.wrap(f"{label}  {responsibility} {when}", FULL_COLS)
+    fg, bg = ("#fff", "#111") if dark else ("#000", "#eee")  # barvy .disclaimer na webu
+    w = round(2 * BORDER + (cols + 4) * CH)
+    lines = textwrap.wrap(f"{label}  {responsibility} {when}", cols)
     h = round(2 * BORDER + 2 * LINE + len(lines) * LINE)
     x0, top = BORDER + 2 * CH, BORDER + LINE
     # Účaří: řádek má výšku LINE, ale písmo je vyšší (ascent+descent = 1.32em); Chrome centruje přesah.
@@ -99,12 +101,12 @@ def full_svg(n, name, responsibility, when):
     for i, line in enumerate(lines):
         y = first_baseline + i * LINE
         if i == 0:
-            paths.append(f'<path d="{text_path(EXTRABOLD, label, FONT_SIZE, x0, y)}" fill="#000"/>')
+            paths.append(f'<path d="{text_path(EXTRABOLD, label, FONT_SIZE, x0, y)}" fill="{fg}"/>')
             line, x = line[len(label):], x0 + len(label) * CH
         else:
             x = x0
-        paths.append(f'<path d="{text_path(MEDIUM, line, FONT_SIZE, x, y)}" fill="#000"/>')
-    return svg(FULL_W, h, f"{label} – Škála AI Odpovědnosti", "#eee", "\n".join(paths) + "\n"), h
+        paths.append(f'<path d="{text_path(MEDIUM, line, FONT_SIZE, x, y)}" fill="{fg}"/>')
+    return svg(w, h, f"{label} – Škála AI Odpovědnosti", bg, "\n".join(paths) + "\n", stroke=fg), h
 
 
 def icon_svg(px):
@@ -172,7 +174,12 @@ def main():
     subtitle = cs["subtitle"]
     for name, dark in (("title.svg", False), ("title-dark.svg", True)):
         (ROOT / "assets" / name).write_text(title_svg(cs["title"], subtitle, dark), encoding="utf-8")
-    print("assets/title.svg, assets/title-dark.svg")
+    # Razítko pro README ve stejné šířce jako hlavička (80ch), světlé a tmavé
+    lv = cs["levels"][2]
+    for name, dark in (("stamp.svg", False), ("stamp-dark.svg", True)):
+        markup, _ = full_svg(lv["n"], lv["name"], lv["responsibility"], lv["when"], cols=76, dark=dark)
+        (ROOT / "assets" / name).write_text(markup, encoding="utf-8")
+    print("assets/title.svg, assets/title-dark.svg, assets/stamp.svg, assets/stamp-dark.svg")
 
 
 if __name__ == "__main__":
