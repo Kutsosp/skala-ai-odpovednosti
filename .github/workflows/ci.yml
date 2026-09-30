@@ -1,0 +1,25 @@
+# Kontrola při každém pushi a PR: syntaxe skriptů, platnost JSON a že odznak.html odpovídá zdrojům.
+name: ci
+on:
+  push:
+  pull_request:
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Syntax of extension scripts
+        run: |
+          for f in extension/docs.js extension/google.js extension/config.js extension/render.js extension/i18n.js; do node --check "$f"; done
+          node -e "const s=require('fs').readFileSync('extension/popup.js','utf8');new Function('return async()=>{'+s.replace(/^import .*$/mg,'')+'}')()"
+          cp apps-script/Code.gs /tmp/Code.js && node --check /tmp/Code.js
+      - name: JSON files
+        run: |
+          for f in extension/manifest.json extension/locales/*.json extension/_locales/*/messages.json scale/*.json apps-script/appsscript.json; do python3 -m json.tool "$f" > /dev/null; done
+      - name: odznak.html is up to date
+        run: |
+          python3 apps-script/build.py
+          git diff --exit-code -- odznak.html

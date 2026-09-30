@@ -54,12 +54,28 @@ def cap_height(font, size):
     return font["OS/2"].sCapHeight * size / font["head"].unitsPerEm
 
 
-def svg(w, h, title, fill, body):
+def svg(w, h, title, fill, body, stroke="#000"):
     return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}" role="img" aria-label="{title}">
 <title>{title}</title>
-<rect x="{BORDER / 2}" y="{BORDER / 2}" width="{w - BORDER}" height="{h - BORDER}" fill="{fill}" stroke="#000" stroke-width="{BORDER}"/>
+<rect x="{BORDER / 2}" y="{BORDER / 2}" width="{w - BORDER}" height="{h - BORDER}" fill="{fill}" stroke="{stroke}" stroke-width="{BORDER}"/>
 {body}</svg>
 """
+
+
+def title_svg(title, subtitle, dark=False):
+    """Hlavička jako na webu (tabulka .header): název 2rem verzálkami tučně, pod ním podtitul. Pro README."""
+    fg, bg = ("#fff", "#000") if dark else ("#000", "#fff")
+    w = round(2 * BORDER + 80 * CH)  # šířka obsahu webu
+    h = round(2 * BORDER + 2 * LINE + 2 * LINE + LINE)  # odsazení, název (2 řádky), podtitul, odsazení
+    x0 = BORDER + 2 * CH
+    title_size = 2 * FONT_SIZE
+    title_baseline = BORDER + LINE + LINE + cap_height(EXTRABOLD, title_size) / 2  # verzálky na střed dvou řádků
+    subtitle_baseline = BORDER + LINE + 2 * LINE + LINE / 2 + cap_height(MEDIUM, FONT_SIZE) / 2
+    body = (
+        f'<path d="{text_path(EXTRABOLD, title.upper(), title_size, x0, title_baseline)}" fill="{fg}"/>\n'
+        f'<path d="{text_path(MEDIUM, subtitle, FONT_SIZE, x0, subtitle_baseline)}" fill="{fg}"/>\n'
+    )
+    return svg(w, h, title, bg, body, stroke=fg)
 
 
 def minimal_svg(n, name):
@@ -104,7 +120,7 @@ def icon_svg(px):
 
 def render(src: Path, png: Path, width, height, scale):
     png.unlink(missing_ok=True)
-    with tempfile.TemporaryDirectory() as profile:
+    with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as profile:
         proc = subprocess.Popen(
             [CHROME, "--headless=new", "--disable-gpu", "--hide-scrollbars", f"--user-data-dir={profile}",
              f"--window-size={width},{height}", f"--force-device-scale-factor={scale}",
@@ -151,6 +167,14 @@ def main():
         render(icon, EXT / "icons" / f"icon{px}.png", px, px, 1)
         icon.unlink()
     print("icons: 16, 48, 128")
+
+    # Hlavička pro README, světlá a tmavá varianta (GitHub přepíná podle nastavení čtenáře)
+    (ROOT / "assets").mkdir(exist_ok=True)
+    cs = json.loads((SCALE / "cs.json").read_text(encoding="utf-8"))
+    subtitle = "Kolik odpovědnosti autor přebírá za dokument vytvořený s LLM nástroji"
+    for name, dark in (("title.svg", False), ("title-dark.svg", True)):
+        (ROOT / "assets" / name).write_text(title_svg(cs["title"], subtitle, dark), encoding="utf-8")
+    print("assets/title.svg, assets/title-dark.svg")
 
 
 if __name__ == "__main__":

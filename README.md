@@ -1,48 +1,55 @@
-# Škála AI Odpovědnosti
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/title-dark.svg">
+  <img alt="Škála AI Odpovědnosti – Kolik odpovědnosti autor přebírá za dokument vytvořený s LLM nástroji" src="assets/title.svg" width="100%">
+</picture>
 
-Systém, který týmům umožňuje efektivně začlenit LLM nástroje do každodenní spolupráce: autor umístěním dokumentu na škálu (PŘEPOSLÁNO, NÁSTŘEL, OVĚŘENO, PODEPSÁNO) jasně komunikuje, jakou odpovědnost za obsah přebírá a na co je připraven přijímat zpětnou vazbu.
+<img alt="2 OVĚŘENO – Znám původ každého čísla a souhlasím s každým tvrzením i závěrem. Prosím o reakci na tvrzení a argumenty, ještě než se pustím do ladění formulací, vzhledu a struktury." src="badges/cs/2-overeno-full.svg" width="618">
 
-Celý dokument: [accountability.md](accountability.md) · web: [kutsosp.github.io/skala-ai-odpovednosti](https://kutsosp.github.io/skala-ai-odpovednosti/)
+[![build](https://img.shields.io/github/actions/workflow/status/Kutsosp/skala-ai-odpovednosti/ci.yml?branch=main&style=flat-square&label=build)](https://github.com/Kutsosp/skala-ai-odpovednosti/actions/workflows/ci.yml)
+[![web](https://img.shields.io/github/deployments/Kutsosp/skala-ai-odpovednosti/github-pages?style=flat-square&label=web)](https://kutsosp.github.io/skala-ai-odpovednosti/)
+[![rozšíření](https://img.shields.io/github/manifest-json/v/Kutsosp/skala-ai-odpovednosti?filename=extension%2Fmanifest.json&style=flat-square&label=rozšíření)](https://github.com/Kutsosp/skala-ai-odpovednosti/releases)
+[![škála](https://img.shields.io/badge/škála-v1.0-black?style=flat-square)](accountability.md)
+
+Autor umístěním dokumentu na škálu (PŘEPOSLÁNO, NÁSTŘEL, OVĚŘENO, PODEPSÁNO) říká, za co v něm odpovídá a na co chce zpětnou vazbu. Definice úrovní a otázky: [accountability.md](accountability.md) · [web](https://kutsosp.github.io/skala-ai-odpovednosti/).
 
 ## Jak označit dokument
 
-Odpovězte na devět otázek ze škály, aplikace určí úroveň a dá vám **odznak** (rámeček s názvem úrovně) nebo **razítko** (šedý rámeček s textem odpovědnosti, volitelná šířka). Obojí je obrázek kreslený písmem JetBrains Mono, takže vypadá všude stejně, a nese odkaz na vysvětlení škály. Tři cesty ke stejné aplikaci:
+Aplikace položí devět otázek ze škály, určí úroveň a vytvoří **odznak** (rámeček s názvem úrovně) nebo **razítko** (rámeček s textem odpovědnosti, nastavitelná šířka). Obojí je obrázek s odkazem na vysvětlení škály. Kde ji spustit:
 
-| Kde | Jak | Co udělá |
+| | Kde | Výsledek |
 |---|---|---|
-| **Web** | tlačítko *Určit úroveň a vytvořit odznak* na [webu](https://kutsosp.github.io/skala-ai-odpovednosti/#odznak) | zkopíruje odznak do schránky; vložíte ⌘V / Ctrl+V do e-mailu, zprávy, dokumentu |
-| **Rozšíření pro Chrome** | ikona rozšíření, nebo v Google Docs / Sheets / Slides položka *AI Škála* v horní nabídce | ze schránky jako web; v Google editorech vloží odznak s odkazem rovnou do dokumentu (Docs: první řádek, Sheets: vybraná buňka, Slides: aktuální snímek) |
+| **Web** | tlačítko *Určit úroveň a vytvořit odznak* na [webu](https://kutsosp.github.io/skala-ai-odpovednosti/#odznak) | zkopíruje odznak do schránky (⌘V / Ctrl+V do e-mailu, zprávy, dokumentu) |
+| **Rozšíření pro Chrome** | ikona rozšíření | totéž ze schránky |
+| | Google Docs, Sheets, Slides: položka *AI Škála* v horní nabídce | vloží odznak s odkazem rovnou do dokumentu: Docs první řádek, Sheets vybraná buňka, Slides aktuální snímek |
 
-Google Docs zahazuje odkazy na obrázcích vložených ze schránky, proto se v Google editorech obrázek vkládá přes Apps Script ([apps-script/Code.gs](apps-script/Code.gs)), který ho uloží přímo do dokumentu s odkazem. Podrobnosti a nastavení: [apps-script/README.md](apps-script/README.md).
+## Rozšíření pro Chrome
 
-## Instalace rozšíření pro Chrome
+**Instalace**
 
-1. Stáhněte zip z [Releases](https://github.com/Kutsosp/skala-ai-odpovednosti/releases) a rozbalte ho (nebo použijte složku `extension/` z tohoto repozitáře).
-2. `chrome://extensions` → zapnout *Režim pro vývojáře* → *Načíst rozbalené* → vybrat rozbalenou složku.
-3. Pro vkládání do Google Docs vás Google při prvním použití požádá o souhlas s úpravou dokumentů. Dokud je aplikace v testovacím režimu, musí být váš účet mezi testovacími uživateli (přidává správce Cloud projektu, max. 100).
+1. Stáhněte `skala-ai-odpovednosti-extension-*.zip` z [Releases](https://github.com/Kutsosp/skala-ai-odpovednosti/releases) a rozbalte ho do složky, kterou nebudete mazat.
+2. Otevřete `chrome://extensions`, zapněte *Režim pro vývojáře* (vpravo nahoře), zvolte *Načíst rozbalené* a vyberte rozbalenou složku.
+3. V Chromu se objeví ikona rozšíření; v Google Docs, Sheets a Slides položka *AI Škála* v horní nabídce.
 
-ID rozšíření je pevné (`lpejomidbnlogocdgapmdmdolpefdkhc`, dané polem `key` v manifestu), aby fungovalo přihlášení k Googlu na každém počítači stejně.
+**Vkládání do Google dokumentů** vyžaduje při prvním použití souhlas s přístupem k vašim dokumentům; Google ho zobrazí sám. Aplikace je zatím v testovacím režimu Googlu, takže váš účet musí být na seznamu testovacích uživatelů (napište správci) a souhlas se jednou týdně obnovuje. Vše ostatní funguje bez přihlášení.
 
-## Struktura repozitáře
+**Aktualizace**: stáhnout nový zip, přepsat složku, v `chrome://extensions` kliknout na ↻ u rozšíření.
 
-| Složka | Obsah |
+## Repozitář
+
+| | |
 |---|---|
-| [scale/](scale/) | texty škály (úrovně, otázky), jeden JSON na jazyk; zdroj pro odznaky, rozšíření i doplněk |
-| [badges/](badges/) | hotové odznaky a razítka (SVG s textem převedeným na křivky, PNG 2×) po jazycích; `build.py` je generuje |
+| [scale/](scale/) | texty škály (úrovně, otázky), jeden JSON na jazyk; zdroj pro odznaky i aplikaci |
+| [badges/](badges/) | odznaky a razítka po jazycích, SVG (text jako křivky) a PNG; `build.py` je generuje |
 | [extension/](extension/) | rozšíření pro Chrome; `popup.html` je zároveň aplikace pro web; texty rozhraní v `locales/` |
-| [apps-script/](apps-script/) | Apps Script, který za rozšíření vkládá obrázek do Google Docs/Sheets/Slides; `build.py` sestaví `odznak.html` pro web a složku pro `clasp push` |
+| [apps-script/](apps-script/) | Apps Script, který za rozšíření vkládá obrázek do Google dokumentů; nastavení v [README](apps-script/README.md) |
 | `odznak.html` | aplikace v jednom souboru pro dialog na webu, generuje `apps-script/build.py` |
 
-## Texty a překlady
-
-Veškeré texty jsou mimo kód: obsah škály v [scale/](scale/), texty rozhraní v [extension/locales/](extension/locales/), název a popis rozšíření v `extension/_locales/`. Nový jazyk = tyto soubory a řádek v `scale/index.json`; rozšíření ho nabídne v přepínači jazyka automaticky. Zdrojem pravdy pro češtinu zůstává [accountability.md](accountability.md).
-
-## Vývoj
+Nový jazyk: `scale/<kód>.json`, `extension/locales/<kód>.json` a řádek v `scale/index.json`.
 
 ```bash
-python3 badges/build.py   # odznaky ze scale/*.json (fonttools + Google Chrome), kopie scale/ do extension/
-python3 apps-script/build.py   # odznak.html pro web a apps-script/dist pro clasp push -f
+python3 badges/build.py        # odznaky, ikony, hlavička README (fonttools + Google Chrome)
+python3 apps-script/build.py   # odznak.html a apps-script/dist; pak (cd apps-script/dist && clasp push -f)
 git tag v1.1.0 && git push --tags   # GitHub Action přiloží zip rozšíření k vydání
 ```
 
-Styl: [The Monospace Web](https://owickstrom.github.io/the-monospace-web/) (Oskar Wickström, MIT). Písmo JetBrains Mono (OFL).
+Styl [The Monospace Web](https://owickstrom.github.io/the-monospace-web/) (Oskar Wickström, MIT), písmo JetBrains Mono (OFL).
