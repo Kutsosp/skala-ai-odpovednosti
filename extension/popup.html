@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="index.css">
 <link rel="stylesheet" href="popup.css">
 </head>
-<body>
+<body data-host="extension">
 
 <table class="header">
   <tr>
@@ -15,8 +15,7 @@
       <h1 class="title" id="title"></h1>
       <span class="subtitle" data-i18n="subtitle"></span>
     </td>
-    <th class="width-min" data-i18n="language"></th>
-    <td class="width-min"><select id="lang"></select></td>
+    <td class="width-min"><strong data-i18n="language"></strong><br><select id="lang"></select></td>
   </tr>
 </table>
 
@@ -35,20 +34,37 @@
   <p><img id="badge" alt=""></p>
   <p><img id="stamp" alt=""></p>
 
-  <p class="meta" data-i18n="stampWidth"></p>
-  <div class="grid" id="widths">
-    <button data-cols="40" data-i18n="narrow" data-i18n-title="colsHint" data-n="40"></button>
-    <button data-cols="60" data-i18n="medium" data-i18n-title="colsHint" data-n="60"></button>
-    <button data-cols="80" data-i18n="wide" data-i18n-title="colsHint" data-n="80"></button>
+  <p class="meta"><span data-i18n="stampWidth"></span> · <span id="cols-readout"></span></p>
+  <input type="range" id="cols" min="24" max="120" step="1" value="60">
+
+  <!-- Rozšíření: kopírování do schránky -->
+  <div id="copy-actions">
+    <p class="meta" data-i18n="copy"></p>
+    <div class="grid">
+      <button id="copy-badge" data-i18n="badge" data-i18n-title="badgeHint"></button>
+      <button id="copy-stamp" data-i18n="stamp" data-i18n-title="stampHint"></button>
+      <button id="copy-text" data-i18n="text" data-i18n-title="textHint"></button>
+    </div>
+    <p class="meta" data-i18n="pasteHint"></p>
   </div>
 
-  <p class="meta" data-i18n="copy"></p>
-  <div class="grid">
-    <button id="copy-badge" data-i18n="badge" data-i18n-title="badgeHint"></button>
-    <button id="copy-stamp" data-i18n="stamp" data-i18n-title="stampHint"></button>
-    <button id="copy-text" data-i18n="text" data-i18n-title="textHint"></button>
+  <!-- Doplněk Google Docs / Sheets / Slides: vložení přímo do dokumentu -->
+  <div id="insert-actions" hidden>
+    <div id="place" hidden>
+      <p class="meta" data-i18n="insertWhere"></p>
+      <div class="grid">
+        <button data-where="start" data-i18n="atStart" class="active"></button>
+        <button data-where="cursor" data-i18n="atCursor"></button>
+      </div>
+    </div>
+    <p class="meta" data-i18n="insert"></p>
+    <div class="grid">
+      <button id="insert-badge" data-i18n="badge" data-i18n-title="badgeHint"></button>
+      <button id="insert-stamp" data-i18n="stamp" data-i18n-title="stampHint"></button>
+    </div>
+    <p class="meta" id="insert-hint"></p>
   </div>
-  <p class="meta" data-i18n="pasteHint"></p>
+
   <p><a href="#" id="restart" data-i18n="restart"></a></p>
 </section>
 

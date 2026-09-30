@@ -1,5 +1,6 @@
 // Texty: obsah škály (scale/<jazyk>.json, kopie ze složky scale/ v repozitáři) a texty rozhraní
 // (locales/<jazyk>.json). SCALE_SOURCE lze později přesměrovat na vzdálený zdroj se stejnou strukturou.
+// Doplněk pro Google Docs dostává tatáž data přibalená v globálu BUNDLED_DATA (viz addon/build.py).
 
 const SCALE_SOURCE = "scale/";
 const UI_SOURCE = "locales/";
@@ -9,6 +10,10 @@ const json = (url) => fetch(url).then((r) => (r.ok ? r.json() : Promise.reject(n
 
 /** Jazyky, pro které existuje obsah škály i texty rozhraní. */
 export async function availableLanguages() {
+  const bundled = globalThis.BUNDLED_DATA;
+  if (bundled) {
+    return bundled.index.map((code) => ({ code, name: bundled.scale[code].languageName, scale: bundled.scale[code], ui: bundled.ui[code] }));
+  }
   const codes = await json(`${SCALE_SOURCE}index.json`);
   const found = await Promise.all(
     codes.map((code) =>
@@ -20,14 +25,20 @@ export async function availableLanguages() {
   return found.filter(Boolean);
 }
 
+// localStorage může být v sandboxu doplňku nedostupné
+const storage = {
+  get: () => { try { return localStorage.getItem(STORAGE_KEY); } catch { return null; } },
+  set: (v) => { try { localStorage.setItem(STORAGE_KEY, v); } catch {} },
+};
+
 /** Uložený jazyk, jinak jazyk prohlížeče, jinak první dostupný. */
 export function pickLanguage(languages) {
-  const saved = localStorage.getItem(STORAGE_KEY);
+  const saved = storage.get();
   const browser = navigator.language.slice(0, 2);
   return languages.find((l) => l.code === saved) || languages.find((l) => l.code === browser) || languages[0];
 }
 
-export const rememberLanguage = (code) => localStorage.setItem(STORAGE_KEY, code);
+export const rememberLanguage = (code) => storage.set(code);
 
 /** Dosadí {klíč} z vars. */
 export const t = (template, vars = {}) => template.replace(/\{(\w+)\}/g, (_, k) => vars[k] ?? `{${k}}`);

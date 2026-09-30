@@ -24,3 +24,7 @@ Veškeré texty jsou mimo kód: obsah škály (názvy úrovní, odpovědnost, ot
 Složka [extension/](extension/) obsahuje rozšíření, které položí devět otázek ze škály, určí úroveň a zkopíruje odznak do schránky. Odznak i razítko kreslí rozšíření za běhu písmem JetBrains Mono (razítko ve třech šířkách), takže vypadají všude stejně. Vloží se (⌘V / Ctrl+V) do Google Docs, e-mailu nebo zprávy jako obrázek s odkazem na tuto stránku a v dokumentu se dají zmenšit tažením za rohy. Google Docs odkazy na obrázcích zahazuje, proto rozšíření volitelně přidá textový odkaz pod obrázek.
 
 Instalace: `chrome://extensions` → zapnout *Režim pro vývojáře* → *Načíst rozbalené* → vybrat složku `extension/`.
+
+## Doplněk pro Google Docs, Sheets a Slides
+
+Google Docs zahazuje odkazy na vložených obrázcích, proto existuje i doplněk ([addon/](addon/)), který vloží odznak přímo do dokumentu s odkazem na škálu. Postranní panel doplňku je tatáž aplikace jako okno rozšíření (sestavuje ji `python3 addon/build.py` ze složky `extension/`). Nasazení a zveřejnění: [addon/README.md](addon/README.md).

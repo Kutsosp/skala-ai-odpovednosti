@@ -1,11 +1,16 @@
 import { availableLanguages, pickLanguage, rememberLanguage, applyUi, t } from "./i18n.js";
 import { renderBadge, renderStamp, toBlob, cssSize } from "./render.js";
 
+// Stejný kód běží ve dvou hostitelích: okno rozšíření (kopíruje do schránky) a postranní panel
+// doplňku Google Docs / Sheets / Slides (vkládá přes google.script.run, viz addon/Code.gs).
+const HOST = document.body.dataset.host || "extension";
 const $ = (id) => document.getElementById(id);
 let scale, ui, questions; // aktuální jazyk
 let index = 0;
 let level = null;
 let cols = 60; // šířka textu razítka ve znacích
+let where = "start"; // doplněk v Docs: začátek dokumentu / u kurzoru
+let editor = null; // doplněk: "docs" | "sheets" | "slides"
 let badge = null, stamp = null; // vykreslené canvasy
 
 const label = () => `${level.n} ${level.name}`;
@@ -23,7 +28,7 @@ function showQuestion() {
 async function drawStamp() {
   stamp = await renderStamp(label(), stampText(), cols);
   $("stamp").src = stamp.toDataURL();
-  for (const b of document.querySelectorAll("#widths button")) b.classList.toggle("active", Number(b.dataset.cols) === cols);
+  $("cols-readout").textContent = t(ui.colsReadout, { n: cols, px: cssSize(stamp).width });
 }
 
 async function finish(n) {
@@ -50,8 +55,8 @@ const blobToDataUrl = (blob) =>
     reader.readAsDataURL(blob);
   });
 
-// Do schránky jde HTML (Gmail…), čistý obrázek (aplikace, které berou jen obrázky) a prostý text
-// (pole bez formátování). Obrázek je data URI: zobrazí se i bez rozšíření a bez načítání z webu.
+// Rozšíření: do schránky jde HTML (Gmail…), čistý obrázek (aplikace, které berou jen obrázky)
+// a prostý text (pole bez formátování). Obrázek je data URI: zobrazí se i bez rozšíření.
 async function copyImage(c) {
   const png = await toBlob(c);
   const { width, height } = cssSize(c);
@@ -69,9 +74,21 @@ async function copyImage(c) {
   ]);
 }
 
-function flash(button) {
+// Doplněk: obrázek jde jako base64 do Apps Scriptu, který ho uloží přímo do dokumentu s odkazem.
+function insertImage(c, button) {
+  const { width, height } = cssSize(c);
+  const base64 = c.toDataURL().split(",")[1];
+  return new Promise((resolve, reject) =>
+    google.script.run
+      .withSuccessHandler(resolve)
+      .withFailureHandler(reject)
+      .insertBadge({ base64, width, height, where, url: scale.url, label: label(), title: t(ui.linkTitle, vars()), alt: t(ui.altText, vars()) }),
+  ).then(() => flash(button, ui.inserted), (e) => flash(button, e.message));
+}
+
+function flash(button, text) {
   const original = button.textContent;
-  button.textContent = ui.copied;
+  button.textContent = text;
   setTimeout(() => (button.textContent = original), 1500);
 }
 
@@ -82,22 +99,41 @@ function useLanguage(lang) {
   document.title = $("title").textContent = scale.title;
   applyUi(ui, { title: scale.title, url: scale.url });
   $("lang").value = lang.code;
+  if (editor) $("insert-hint").textContent = ui[`insertHint_${editor}`] ?? "";
   if (level) finish(level.n); // překreslit výsledek v novém jazyce
   else showQuestion();
 }
 
 $("yes").onclick = () => (++index === questions.length ? finish(3) : showQuestion());
 $("no").onclick = () => finish(Math.floor(index / 3));
-for (const b of document.querySelectorAll("#widths button")) b.onclick = () => ((cols = Number(b.dataset.cols)), drawStamp());
-$("copy-badge").onclick = (e) => copyImage(badge).then(() => flash(e.target));
-$("copy-stamp").onclick = (e) => copyImage(stamp).then(() => flash(e.target));
-$("copy-text").onclick = (e) => navigator.clipboard.writeText(t(ui.plainText, vars())).then(() => flash(e.target));
+$("cols").oninput = (e) => ((cols = Number(e.target.value)), drawStamp());
+$("copy-badge").onclick = (e) => copyImage(badge).then(() => flash(e.target, ui.copied));
+$("copy-stamp").onclick = (e) => copyImage(stamp).then(() => flash(e.target, ui.copied));
+$("copy-text").onclick = (e) => navigator.clipboard.writeText(t(ui.plainText, vars())).then(() => flash(e.target, ui.copied));
+$("insert-badge").onclick = (e) => insertImage(badge, e.target);
+$("insert-stamp").onclick = (e) => insertImage(stamp, e.target);
+for (const b of document.querySelectorAll("#place button")) {
+  b.onclick = () => {
+    where = b.dataset.where;
+    for (const o of document.querySelectorAll("#place button")) o.classList.toggle("active", o === b);
+  };
+}
 $("restart").onclick = (e) => (e.preventDefault(), restart());
 document.addEventListener("keydown", (e) => {
   if ($("quiz").hidden) return;
   if (e.key === "a" || e.key === "A") $("yes").click();
   if (e.key === "n" || e.key === "N") $("no").click();
 });
+
+if (HOST === "addon") {
+  $("copy-actions").hidden = true;
+  $("insert-actions").hidden = false;
+  google.script.run.withSuccessHandler((host) => {
+    editor = host;
+    $("place").hidden = host !== "docs";
+    if (ui) $("insert-hint").textContent = ui[`insertHint_${host}`] ?? "";
+  }).getHost();
+}
 
 const languages = await availableLanguages();
 for (const l of languages) $("lang").append(new Option(l.name, l.code));

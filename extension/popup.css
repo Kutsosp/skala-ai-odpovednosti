@@ -1,6 +1,8 @@
-/* Úpravy index.css pro okno rozšíření. Vše ostatní dědí ze stylu webu. */
+/* Úpravy index.css pro okno rozšíření a postranní panel doplňku. Vše ostatní dědí ze stylu webu. */
 html, body { width: 46ch; }
 body { padding: var(--line-height) 2ch; }
+/* Postranní panel Google má pevnou šířku 300px; přizpůsobit se mu */
+:root:has(> body[data-host="addon"]), body[data-host="addon"] { width: 100%; }
 
 h1.title { font-size: 1rem; line-height: var(--line-height); margin-bottom: 0; }
 h2 { margin-top: 0; text-transform: none; font-size: 1.125rem; min-height: calc(3 * var(--line-height)); }
@@ -26,3 +28,30 @@ select {
   appearance: none;
 }
 select:focus { outline: var(--border-thickness) solid var(--text-color); outline-offset: 2px; }
+
+/* Posuvník šířky razítka: čára a čtvercový jezdec v duchu monospace */
+input[type=range] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: var(--line-height);
+  padding: 0;
+  border: none;
+  background: transparent;
+  margin-bottom: var(--line-height);
+  cursor: ew-resize;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  height: var(--border-thickness);
+  background: var(--text-color);
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 2ch;
+  height: var(--line-height);
+  margin-top: calc((var(--line-height) - var(--border-thickness)) / -2);
+  background: var(--text-color);
+  border: none;
+}
+input[type=range]:focus { outline: none; }
+input[type=range]:focus::-webkit-slider-thumb { outline: var(--border-thickness) solid var(--text-color-alt); }
