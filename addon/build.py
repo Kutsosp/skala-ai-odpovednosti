@@ -16,6 +16,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 EXT, SCALE, ADDON = ROOT / "extension", ROOT / "scale", ROOT / "addon"
 DIST, API = ADDON / "dist", ADDON / "dist-api"
+# Apps Script projekty (clasp). Vytvořeny jednou přes `clasp create`; .clasp.json se generuje, není v gitu.
+CLASP = {
+    "dist": {"scriptId": "1tAPmiOeRmFOXmvbCiBTteuTW5X5Fz6dxuseykNTwRFioShcHb6tchExF", "parentId": "1kda1r7p-i-_v6K517YP-vuhL8efTQIwV7WxAmJ4oGEU"},
+    "dist-api": {"scriptId": "1YUPu3gW7R24d2B2zpF269B3ys5i7o8FRRODLc4W7mU83gkJ4BLwhr35H"},
+}
 FONTS = '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;800&display=swap">'
 
 
@@ -64,6 +69,11 @@ def main():
     shutil.copy(ADDON / "Code.gs", API / "Code.gs")
     shutil.copy(ADDON / "appsscript-api.json", API / "appsscript.json")
     print("addon/dist-api/: Code.gs, appsscript.json")
+
+    for folder, ids in CLASP.items():
+        clasp = ADDON / folder / ".clasp.json"
+        if not clasp.exists():
+            clasp.write_text(json.dumps({**ids, "rootDir": ""}, indent=2) + "\n")
 
 
 if __name__ == "__main__":

@@ -9,6 +9,7 @@ import { runScript } from "./google.js";
 const query = new URLSearchParams(location.search);
 const HOST = query.get("host") || document.body.dataset.host || "extension";
 document.body.dataset.host = HOST; // pro CSS (popup.css)
+if (window.top !== window.self) document.body.dataset.embedded = ""; // iframe na webu nebo v Docs
 const $ = (id) => document.getElementById(id);
 let scale, ui, questions; // aktuální jazyk
 let index = 0;

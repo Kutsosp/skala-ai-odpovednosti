@@ -6,7 +6,8 @@ body { padding: var(--line-height) 2ch; }
 /* Panel v nabídce Google Docs: menší písmo, aby seděl k rozhraní Docs */
 :root:has(> body[data-host="docs"]) { font-size: 13px; width: 100%; }
 body[data-host="docs"] { width: 100%; }
-@media screen and (max-width: 480px) { html, body { width: 100%; } }
+/* Jen v iframe (dialog na webu): okno rozšíření si šířku měří z obsahu a tohle by ho zúžilo */
+@media screen and (max-width: 480px) { :root:has(> body[data-embedded]), body[data-embedded] { width: 100%; } }
 
 h1.title { font-size: 1rem; line-height: var(--line-height); margin-bottom: 0; }
 h2 { margin-top: 0; text-transform: none; font-size: 1.125rem; min-height: calc(3 * var(--line-height)); }

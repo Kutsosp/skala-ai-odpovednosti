@@ -6,7 +6,7 @@ na škálu. Nasazuje se dvěma způsoby ze stejného zdroje (`python3 addon/buil
 | Složka | Co to je | Kdo to volá | Pro koho |
 |---|---|---|---|
 | `dist/` | doplněk s postranním panelem (sidebar.html = aplikace z `extension/`) | menu Rozšíření v Docs/Sheets/Slides | Sheets a Slides; kdo nemá rozšíření pro Chrome |
-| `dist-api/` | API executable bez panelu | rozšíření pro Chrome z položky „Škála“ v horní nabídce Docs (`extension/docs.js`, `google.js`) | hlavní cesta v Docs, po vzoru Zotera |
+| `dist-api/` | API executable bez panelu | rozšíření pro Chrome z položky „AI Škála“ v horní nabídce Docs (`extension/docs.js`, `google.js`) | hlavní cesta v Docs, po vzoru Zotera |
 
 | Editor | Obrázek | Odkaz | Kam |
 |---|---|---|---|
@@ -26,18 +26,21 @@ Apps Script API. Uživatel jednou potvrdí přístup Googlu (stejně jako u Zote
 3. **OAuth client ID** typu *Chrome Extension*, Item ID = `mnkcmhbncdclkfacojppflcljmaeoabe`
    (pevné ID rozšíření dané polem `key` v manifest.json). Client ID zapsat do `extension/manifest.json`
    → `oauth2.client_id`.
-4. **Apps Script projekt**: `cd addon/dist-api && clasp create --type standalone --title "Škála AI Odpovědnosti API"`,
-   pak `clasp push -f`. V editoru skriptu (`clasp open-script`) → Nastavení projektu → *Změnit projekt*
-   Google Cloud → zadat číslo projektu z bodu 1. Pak Nasadit → Nové nasazení → typ *API Executable*
-   (přístup: kdokoli) → Nasadit. Script ID (Nastavení projektu) zapsat do `extension/config.js`.
-5. Znovu načíst rozšíření v `chrome://extensions`, otevřít libovolný Google Doc: v nabídce je „Škála“.
+4. **Apps Script projekt**: `python3 addon/build.py && cd addon/dist-api && clasp push -f` (build vytvoří
+   `.clasp.json` se script ID, projekt už existuje). V editoru skriptu (`clasp open-script`) → Nastavení
+   projektu → *Změnit projekt* Google Cloud → zadat číslo projektu z bodu 1. Pak Nasadit → Nové nasazení →
+   typ *API Executable* (přístup: kdokoli) → Nasadit. Script ID je v `extension/config.js`.
+5. Znovu načíst rozšíření v `chrome://extensions`, otevřít libovolný Google Doc: v nabídce je „AI Škála“.
+
+Stav (2026-09-30): kroky 1–5 provedeny, Cloud projekt č. 947530174977, consent screen v režimu Testing.
+Nové kolegy stačí přidat mezi testovací uživatele (Google Auth Platform → Audience → Test users).
 
 Při každé změně Code.gs: `python3 addon/build.py && (cd addon/dist-api && clasp push -f)` a v editoru
 skriptu *Nasadit → Spravovat nasazení → upravit → nová verze*.
 
 ## B. Doplněk s panelem (Sheets, Slides)
 
-1. `cd addon/dist && clasp create --type docs --title "Škála AI Odpovědnosti"` (jednorázově), `clasp push -f`.
+1. `python3 addon/build.py && cd addon/dist && clasp push -f` (projekt existuje, `.clasp.json` vytvoří build).
 2. Test: otevřít dokument, k němuž je skript připojen, menu Rozšíření → Škála AI Odpovědnosti. Pro
    Sheets/Slides v editoru skriptu Nasadit → Testovací nasazení → Nainstalovat.
 3. Zveřejnění: OAuth consent screen *Internal* (Workspace) a v Google Workspace Marketplace SDK
