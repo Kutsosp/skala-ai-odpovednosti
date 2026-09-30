@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
-"""Sestaví postranní panel doplňku z aplikace rozšíření: addon/dist/sidebar.html.
+"""Sestaví aplikaci z extension/ do jednoho HTML souboru pro prostředí bez modulů a fetch():
 
-Apps Script servíruje jediný HTML soubor v sandboxu bez relativních URL, proto se sem
-vloží CSS, JavaScript i texty (scale/, extension/locales/) přímo. Písmo jde z Google Fonts.
-Spuštění z kořene repozitáře:
+  addon/dist/sidebar.html  – postranní panel doplňku Google (Apps Script servíruje jediný soubor v sandboxu)
+  odznak.html              – dialog na webu (funguje i z disku přes file://, kde moduly nejdou)
+
+Do souboru se vloží CSS, JavaScript i texty (scale/, extension/locales/). Spuštění z kořene repozitáře:
 
     python3 addon/build.py
-    (cd addon/dist && clasp push)
+    (cd addon/dist && clasp push -f)
 """
 import json
 import re
@@ -21,7 +22,8 @@ CLASP = {
     "dist": {"scriptId": "1tAPmiOeRmFOXmvbCiBTteuTW5X5Fz6dxuseykNTwRFioShcHb6tchExF", "parentId": "1kda1r7p-i-_v6K517YP-vuhL8efTQIwV7WxAmJ4oGEU"},
     "dist-api": {"scriptId": "1YUPu3gW7R24d2B2zpF269B3ys5i7o8FRRODLc4W7mU83gkJ4BLwhr35H"},
 }
-FONTS = '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;800&display=swap">'
+GOOGLE_FONTS = '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;800&display=swap">'
+LOCAL_FONTS = '<link rel="stylesheet" href="extension/fonts.css">'
 
 
 def bundled_data():
@@ -44,25 +46,30 @@ def bundled_js():
     return "(async () => {\n" + "\n".join(parts) + "\n})();"
 
 
-def main():
-    DIST.mkdir(exist_ok=True)
+def bundle(host, fonts):
+    """popup.html s vloženým CSS, texty a skriptem; body[data-host] říká skriptu, kde běží."""
     css = "\n".join(
         (EXT / f).read_text(encoding="utf-8").replace("@import url('fonts.css');", "")
         for f in ("reset.css", "index.css", "popup.css")
     )
     html = (EXT / "popup.html").read_text(encoding="utf-8")
     html = re.sub(r'<link rel="stylesheet" href="[^"]+">\n', "", html)
-    html = html.replace("</head>", f"{FONTS}\n<style>\n{css}\n</style>\n</head>")
-    html = html.replace('<body data-host="extension">', '<body data-host="addon">')
+    html = html.replace("</head>", f"{fonts}\n<style>\n{css}\n</style>\n</head>")
+    html = html.replace('<body data-host="extension">', f'<body data-host="{host}">')
     data = json.dumps(bundled_data(), ensure_ascii=False)
-    html = html.replace(
+    return html.replace(
         '<script type="module" src="popup.js"></script>',
         f"<script>\nwindow.BUNDLED_DATA = {data};\n</script>\n<script>\n{bundled_js()}\n</script>",
     )
-    (DIST / "sidebar.html").write_text(html, encoding="utf-8")
+
+
+def main():
+    DIST.mkdir(exist_ok=True)
+    sidebar = bundle("addon", GOOGLE_FONTS)
+    (DIST / "sidebar.html").write_text(sidebar, encoding="utf-8")
     for f in ("Code.gs", "appsscript.json"):
         shutil.copy(ADDON / f, DIST / f)
-    print(f"addon/dist/: sidebar.html ({len(html) // 1024} kB), Code.gs, appsscript.json")
+    print(f"addon/dist/: sidebar.html ({len(sidebar) // 1024} kB), Code.gs, appsscript.json")
 
     # Tentýž Code.gs jako API executable pro rozšíření (Zotero-style): jiný manifest, bez panelu.
     API.mkdir(exist_ok=True)
@@ -74,6 +81,10 @@ def main():
         clasp = ADDON / folder / ".clasp.json"
         if not clasp.exists():
             clasp.write_text(json.dumps({**ids, "rootDir": ""}, indent=2) + "\n")
+
+    web = bundle("extension", LOCAL_FONTS)
+    (ROOT / "odznak.html").write_text(web, encoding="utf-8")
+    print(f"odznak.html ({len(web) // 1024} kB) pro dialog na webu")
 
 
 if __name__ == "__main__":
