@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<title>Škála AI Odpovědnosti</title>
+<link rel="stylesheet" href="reset.css">
+<link rel="stylesheet" href="index.css">
+<link rel="stylesheet" href="popup.css">
+</head>
+<body data-host="extension">
+
+<table class="header">
+  <tr>
+    <td class="width-auto">
+      <h1 class="title" id="title"></h1>
+      <span class="subtitle" data-i18n="subtitle"></span>
+    </td>
+    <td class="width-min"><strong data-i18n="language"></strong><br><select id="lang"></select></td>
+  </tr>
+</table>
+
+<section id="quiz">
+  <p class="meta"><span id="step"></span> · <span id="transition"></span></p>
+  <h2 id="question"></h2>
+  <div class="grid">
+    <button id="yes" data-i18n="yes" data-i18n-title="keyHint" data-key="A"></button>
+    <button id="no" data-i18n="no" data-i18n-title="keyHint" data-key="N"></button>
+  </div>
+  <p class="meta" data-i18n="yesMeansHtml"></p>
+</section>
+
+<section id="result" hidden>
+  <p class="meta" data-i18n="yourLevel"></p>
+  <p><img id="badge" alt=""></p>
+  <p><img id="stamp" alt=""></p>
+
+  <p class="meta"><span data-i18n="stampWidth"></span> · <span id="cols-readout"></span></p>
+  <input type="range" id="cols" min="24" max="120" step="1" value="60">
+
+  <!-- Rozšíření: kopírování do schránky -->
+  <div id="copy-actions">
+    <p class="meta" data-i18n="copy"></p>
+    <div class="grid">
+      <button id="copy-badge" data-i18n="badge" data-i18n-title="badgeHint"></button>
+      <button id="copy-stamp" data-i18n="stamp" data-i18n-title="stampHint"></button>
+      <button id="copy-text" data-i18n="text" data-i18n-title="textHint"></button>
+    </div>
+    <p class="meta" data-i18n="pasteHint"></p>
+  </div>
+
+  <!-- Panel v Google Docs / Sheets / Slides: vložení přímo do dokumentu -->
+  <div id="insert-actions" hidden>
+    <p class="meta" data-i18n="insert"></p>
+    <div class="grid">
+      <button id="insert-badge" data-i18n="badge" data-i18n-title="badgeHint"></button>
+      <button id="insert-stamp" data-i18n="stamp" data-i18n-title="stampHint"></button>
+    </div>
+    <p class="meta" id="insert-hint"></p>
+  </div>
+
+  <p><a href="#" id="restart" data-i18n="restart"></a></p>
+</section>
+
+<hr>
+<p class="meta" data-i18n="footerHtml"></p>
+
+<script type="module" src="popup.js"></script>
+</body>
+</html>

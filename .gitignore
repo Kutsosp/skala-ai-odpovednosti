@@ -1,0 +1,3 @@
+apps-script/dist/
+__pycache__/
+*.pem

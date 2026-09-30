@@ -1,0 +1,68 @@
+{
+  "language": "en",
+  "languageName": "English",
+  "scaleVersion": "1.0",
+  "title": "AI Accountability Scale",
+  "subtitle": "How much responsibility an author takes for a document written with LLM tools",
+  "author": "Peter Kutsos",
+  "url": "https://kutsosp.github.io/skala-ai-odpovednosti/",
+  "levelsPath": "level",
+  "intro": [
+    "The AI Accountability Scale is a system meant to help teams bring LLM tools into their everyday collaboration. By placing a document on the scale, the author gives an honest assessment of the effort they put into it and communicates that assessment to colleagues.",
+    "Recipients can then fairly decide which parts of the document to give feedback on and where to expect changes from the author first."
+  ],
+  "page": {
+    "version": "Scale version",
+    "author": "Author",
+    "committed": "The author of the document you came from committed to this level by answering YES to these questions:",
+    "committedNone": "The author of the document you came from takes no responsibility for its content. Responsibility starts at level 1 DRAFT.",
+    "more": "The full scale and all four levels →"
+  },
+  "levels": [
+    {
+      "n": 0,
+      "name": "FORWARDED",
+      "slug": "forwarded",
+      "responsibility": "I take no responsibility for the content. I made no substantial changes, or I haven't read it.",
+      "when": "Use when the recipient has no access to LLM tools; otherwise they could have generated it themselves."
+    },
+    {
+      "n": 1,
+      "name": "DRAFT",
+      "slug": "draft",
+      "responsibility": "The direction is relevant. I understand every sentence and can put it in my own words.",
+      "when": "Please respond to the direction before I start refining the details."
+    },
+    {
+      "n": 2,
+      "name": "VERIFIED",
+      "slug": "verified",
+      "responsibility": "I know where every number comes from and I agree with every claim and conclusion.",
+      "when": "Please respond to the claims and arguments before I start refining the wording, layout and structure."
+    },
+    {
+      "n": 3,
+      "name": "SIGNED",
+      "slug": "signed",
+      "responsibility": "I take responsibility for the layout, the structure and every sentence.",
+      "when": "I sign my name to this document and consider it finished."
+    }
+  ],
+  "questions": [
+    [
+      "Have you read all of it?",
+      "Is the direction of the document relevant?",
+      "Do you understand every sentence and can you put it in your own words?"
+    ],
+    [
+      "Do you know where every number comes from?",
+      "Do you agree with every claim?",
+      "Do you agree with every conclusion? Do the conclusions follow from the claims?"
+    ],
+    [
+      "Is every sentence worded the way you would word it yourself?",
+      "Is the structure of the document logical and clear?",
+      "Is the document's appearance presentable?"
+    ]
+  ]
+}

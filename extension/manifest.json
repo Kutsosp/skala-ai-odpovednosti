@@ -1,0 +1,37 @@
+{
+  "manifest_version": 3,
+  "name": "__MSG_name__",
+  "version": "1.1.0",
+  "description": "__MSG_description__",
+  "default_locale": "cs",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAw98oE1H2kEq1Dpx/iwWoxBcJpbFomIKLuEcHAZGsd9w8C7Q0YBSiL/Nlu6U2k83hvWMuwZ7opKjHGNAp9DZsj/SUEG6Iats5j2UvFZOGIdNkCoLC6tPSzwc6zL2QspMD2hg0gQuSPm1YaAamht8i42+TMoXsJ6CROYaU+NpNRv3XhhLy4o0EPQcMZd8vKWHK2t1q6dAhBMGvZzBVchNkZifzng81LKKzQ3a7AFNF9BgtzIAWjiDvw/zMt/VPP3kn4mNjcadNCxQl0VPACocpwkRvVIAeBmTeCUTiJ/qX6IDuj5kTPkIdTIUroVbfkEQyc+esOP6sFKcH9p6ld97JnQIDAQAB",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "__MSG_name__",
+    "default_icon": { "16": "icons/icon16.png", "48": "icons/icon48.png", "128": "icons/icon128.png" }
+  },
+  "icons": { "16": "icons/icon16.png", "48": "icons/icon48.png", "128": "icons/icon128.png" },
+  "permissions": ["clipboardWrite", "identity"],
+  "host_permissions": ["https://script.googleapis.com/"],
+  "oauth2": {
+    "client_id": "947530174977-ac5fidun55366a898gfbustt78nmuv9p.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/documents",
+      "https://www.googleapis.com/auth/spreadsheets",
+      "https://www.googleapis.com/auth/presentations"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://docs.google.com/document/*", "https://docs.google.com/spreadsheets/*", "https://docs.google.com/presentation/*"],
+      "js": ["docs.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["popup.html", "*.js", "*.css", "fonts/*", "scale/*", "locales/*"],
+      "matches": ["https://docs.google.com/*"]
+    }
+  ]
+}
