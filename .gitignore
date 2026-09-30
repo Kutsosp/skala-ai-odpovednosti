@@ -1,4 +1,3 @@
-addon/dist/
-addon/dist-api/
+apps-script/dist/
 __pycache__/
 *.pem

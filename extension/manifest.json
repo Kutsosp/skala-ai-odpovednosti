@@ -15,11 +15,15 @@
   "host_permissions": ["https://script.googleapis.com/"],
   "oauth2": {
     "client_id": "947530174977-ac5fidun55366a898gfbustt78nmuv9p.apps.googleusercontent.com",
-    "scopes": ["https://www.googleapis.com/auth/documents"]
+    "scopes": [
+      "https://www.googleapis.com/auth/documents",
+      "https://www.googleapis.com/auth/spreadsheets",
+      "https://www.googleapis.com/auth/presentations"
+    ]
   },
   "content_scripts": [
     {
-      "matches": ["https://docs.google.com/document/*"],
+      "matches": ["https://docs.google.com/document/*", "https://docs.google.com/spreadsheets/*", "https://docs.google.com/presentation/*"],
       "js": ["docs.js"],
       "run_at": "document_idle"
     }

@@ -1,6 +1,6 @@
 // Texty: obsah škály (scale/<jazyk>.json, kopie ze složky scale/ v repozitáři) a texty rozhraní
 // (locales/<jazyk>.json). SCALE_SOURCE lze později přesměrovat na vzdálený zdroj se stejnou strukturou.
-// Doplněk pro Google Docs dostává tatáž data přibalená v globálu BUNDLED_DATA (viz addon/build.py).
+// Jednosouborová verze pro web (odznak.html) dostává tatáž data v globálu BUNDLED_DATA (apps-script/build.py).
 
 const SCALE_SOURCE = "scale/";
 const UI_SOURCE = "locales/";

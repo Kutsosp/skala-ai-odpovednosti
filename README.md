@@ -11,10 +11,9 @@ Odpovězte na devět otázek ze škály, aplikace určí úroveň a dá vám **o
 | Kde | Jak | Co udělá |
 |---|---|---|
 | **Web** | tlačítko *Určit úroveň a vytvořit odznak* na [webu](https://kutsosp.github.io/skala-ai-odpovednosti/#odznak) | zkopíruje odznak do schránky; vložíte ⌘V / Ctrl+V do e-mailu, zprávy, dokumentu |
-| **Rozšíření pro Chrome** | ikona rozšíření, nebo v Google Docs položka *AI Škála* v horní nabídce | ze schránky jako web; v Docs vloží odznak s odkazem rovnou na první řádek dokumentu |
-| **Doplněk Google** | Sheets / Slides / Docs: menu *Rozšíření → Škála AI Odpovědnosti* | vloží odznak do dokumentu z postranního panelu |
+| **Rozšíření pro Chrome** | ikona rozšíření, nebo v Google Docs / Sheets / Slides položka *AI Škála* v horní nabídce | ze schránky jako web; v Google editorech vloží odznak s odkazem rovnou do dokumentu (Docs: první řádek, Sheets: vybraná buňka, Slides: aktuální snímek) |
 
-Google Docs zahazuje odkazy na obrázcích vložených ze schránky, proto Docs cesty vkládají obrázek přes Apps Script ([addon/Code.gs](addon/Code.gs)), který ho uloží přímo do dokumentu s odkazem.
+Google Docs zahazuje odkazy na obrázcích vložených ze schránky, proto se v Google editorech obrázek vkládá přes Apps Script ([apps-script/Code.gs](apps-script/Code.gs)), který ho uloží přímo do dokumentu s odkazem. Podrobnosti a nastavení: [apps-script/README.md](apps-script/README.md).
 
 ## Instalace rozšíření pro Chrome
 
@@ -30,8 +29,9 @@ ID rozšíření je pevné (`lpejomidbnlogocdgapmdmdolpefdkhc`, dané polem `key
 |---|---|
 | [scale/](scale/) | texty škály (úrovně, otázky), jeden JSON na jazyk; zdroj pro odznaky, rozšíření i doplněk |
 | [badges/](badges/) | hotové odznaky a razítka (SVG s textem převedeným na křivky, PNG 2×) po jazycích; `build.py` je generuje |
-| [extension/](extension/) | rozšíření pro Chrome; `popup.html` je zároveň aplikace pro web a doplněk; texty rozhraní v `locales/` |
-| [addon/](addon/) | Apps Script pro Google Docs/Sheets/Slides a `build.py`, který z `extension/` sestaví postranní panel; nasazení viz [addon/README.md](addon/README.md) |
+| [extension/](extension/) | rozšíření pro Chrome; `popup.html` je zároveň aplikace pro web; texty rozhraní v `locales/` |
+| [apps-script/](apps-script/) | Apps Script, který za rozšíření vkládá obrázek do Google Docs/Sheets/Slides; `build.py` sestaví `odznak.html` pro web a složku pro `clasp push` |
+| `odznak.html` | aplikace v jednom souboru pro dialog na webu, generuje `apps-script/build.py` |
 
 ## Texty a překlady
 
@@ -41,7 +41,7 @@ Veškeré texty jsou mimo kód: obsah škály v [scale/](scale/), texty rozhran�
 
 ```bash
 python3 badges/build.py   # odznaky ze scale/*.json (fonttools + Google Chrome), kopie scale/ do extension/
-python3 addon/build.py    # addon/dist (doplněk) a addon/dist-api (API pro rozšíření), pak clasp push -f
+python3 apps-script/build.py   # odznak.html pro web a apps-script/dist pro clasp push -f
 git tag v1.1.0 && git push --tags   # GitHub Action přiloží zip rozšíření k vydání
 ```
 

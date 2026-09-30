@@ -1,9 +1,7 @@
-/* Úpravy index.css pro okno rozšíření a postranní panel doplňku. Vše ostatní dědí ze stylu webu. */
+/* Úpravy index.css pro okno rozšíření, panel v Google editorech a dialog na webu. Vše ostatní dědí ze stylu webu. */
 html, body { width: 46ch; }
 body { padding: var(--line-height) 2ch; }
-/* Postranní panel Google má pevnou šířku 300px a dialog na webu na telefonu také méně než 46ch */
-:root:has(> body[data-host="addon"]), body[data-host="addon"] { width: 100%; }
-/* Panel v nabídce Google Docs: menší písmo, aby seděl k rozhraní Docs */
+/* Panel v nabídce Google Docs/Sheets/Slides: menší písmo, aby seděl k rozhraní Googlu */
 :root:has(> body[data-host="docs"]) { font-size: 13px; width: 100%; }
 body[data-host="docs"] { width: 100%; }
 /* Jen v iframe (dialog na webu): okno rozšíření si šířku měří z obsahu a tohle by ho zúžilo */

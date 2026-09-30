@@ -2,12 +2,12 @@ import { availableLanguages, pickLanguage, rememberLanguage, applyUi, t } from "
 import { renderBadge, renderStamp, toBlob, cssSize } from "./render.js";
 import { runScript } from "./google.js";
 
-// Stejný kód běží ve třech hostitelích:
-//  extension – okno rozšíření a dialog na webu: kopíruje do schránky
-//  docs      – panel vložený rozšířením do Google Docs: vkládá přes Apps Script API (google.js)
-//  addon     – postranní panel doplňku Google Docs/Sheets/Slides: vkládá přes google.script.run
+// Stejný kód běží ve dvou hostitelích:
+//  extension – okno rozšíření a dialog na webu (odznak.html): kopíruje do schránky
+//  docs      – panel vložený rozšířením do Google Docs/Sheets/Slides (docs.js): vkládá přes Apps Script API
 const query = new URLSearchParams(location.search);
-const HOST = query.get("host") || document.body.dataset.host || "extension";
+const HOST = query.get("host") || "extension";
+const KIND = query.get("kind"); // docs | sheets | slides
 document.body.dataset.host = HOST; // pro CSS (popup.css)
 if (window.top !== window.self) document.body.dataset.embedded = ""; // iframe na webu nebo v Docs
 const $ = (id) => document.getElementById(id);
@@ -15,8 +15,6 @@ let scale, ui, questions; // aktuální jazyk
 let index = 0;
 let level = null;
 let cols = 60; // šířka textu razítka ve znacích
-let where = "start"; // doplněk v Docs: začátek dokumentu / u kurzoru
-let editor = HOST === "docs" ? "docs" : null; // "docs" | "sheets" | "slides"
 let badge = null, stamp = null; // vykreslené canvasy
 
 const label = () => `${level.n} ${level.name}`;
@@ -80,20 +78,19 @@ async function copyImage(c) {
   ]);
 }
 
-// Vložení do dokumentu: obrázek jde jako base64 do Apps Scriptu (addon/Code.gs), který ho uloží
-// přímo do dokumentu s odkazem. Z doplňku přes google.script.run, z Docs panelu přes Apps Script API.
+// Panel v Google editoru: obrázek jde jako base64 do Apps Scriptu (apps-script/Code.gs), který ho uloží
+// přímo do dokumentu s odkazem. Kam: Docs první řádek, Sheets vybraná buňka, Slides aktuální snímek.
 function insertImage(c, button) {
   const { width, height } = cssSize(c);
   const params = {
-    base64: c.toDataURL().split(",")[1], width, height, where, url: scale.url,
-    label: label(), title: t(ui.linkTitle, vars()), alt: t(ui.altText, vars()), docId: query.get("doc"),
+    kind: KIND, docId: query.get("doc"), gid: query.get("gid"), range: query.get("range"), pageId: query.get("page"),
+    base64: c.toDataURL().split(",")[1], width, height,
+    url: scale.url, label: label(), title: t(ui.linkTitle, vars()), alt: t(ui.altText, vars()),
   };
-  const run =
-    HOST === "addon"
-      ? new Promise((resolve, reject) => google.script.run.withSuccessHandler(resolve).withFailureHandler(reject).insertBadge(params))
-      : runScript("insertBadge", params);
   button.disabled = true;
-  return run.then(() => flash(button, ui.inserted), (e) => flash(button, e.message, 4000)).finally(() => (button.disabled = false));
+  return runScript("insertBadge", params)
+    .then(() => flash(button, ui.inserted), (e) => flash(button, e.message, 4000))
+    .finally(() => (button.disabled = false));
 }
 
 function flash(button, text, ms = 1500) {
@@ -109,7 +106,7 @@ function useLanguage(lang) {
   document.title = $("title").textContent = scale.title;
   applyUi(ui, { title: scale.title, url: scale.url });
   $("lang").value = lang.code;
-  if (editor) $("insert-hint").textContent = ui[`insertHint_${HOST === "docs" ? "docsapi" : editor}`] ?? "";
+  if (KIND) $("insert-hint").textContent = ui[`insertHint_${KIND}`] ?? "";
   if (level) finish(level.n); // překreslit výsledek v novém jazyce
   else showQuestion();
 }
@@ -122,12 +119,6 @@ $("copy-stamp").onclick = (e) => copyImage(stamp).then(() => flash(e.target, ui.
 $("copy-text").onclick = (e) => navigator.clipboard.writeText(t(ui.plainText, vars())).then(() => flash(e.target, ui.copied));
 $("insert-badge").onclick = (e) => insertImage(badge, e.target);
 $("insert-stamp").onclick = (e) => insertImage(stamp, e.target);
-for (const b of document.querySelectorAll("#place button")) {
-  b.onclick = () => {
-    where = b.dataset.where;
-    for (const o of document.querySelectorAll("#place button")) o.classList.toggle("active", o === b);
-  };
-}
 $("restart").onclick = (e) => (e.preventDefault(), restart());
 document.addEventListener("keydown", (e) => {
   if ($("quiz").hidden) return;
@@ -135,16 +126,9 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "n" || e.key === "N") $("no").click();
 });
 
-if (HOST !== "extension") {
+if (HOST === "docs") {
   $("copy-actions").hidden = true;
   $("insert-actions").hidden = false;
-}
-if (HOST === "addon") {
-  google.script.run.withSuccessHandler((host) => {
-    editor = host;
-    $("place").hidden = host !== "docs";
-    if (ui) $("insert-hint").textContent = ui[`insertHint_${host}`] ?? "";
-  }).getHost();
 }
 
 const languages = await availableLanguages();
