@@ -1,8 +1,9 @@
 /* Úpravy index.css pro okno rozšíření a postranní panel doplňku. Vše ostatní dědí ze stylu webu. */
 html, body { width: 46ch; }
 body { padding: var(--line-height) 2ch; }
-/* Postranní panel Google má pevnou šířku 300px; přizpůsobit se mu */
+/* Postranní panel Google má pevnou šířku 300px a dialog na webu na telefonu také méně než 46ch */
 :root:has(> body[data-host="addon"]), body[data-host="addon"] { width: 100%; }
+@media screen and (max-width: 480px) { html, body { width: 100%; } }
 
 h1.title { font-size: 1rem; line-height: var(--line-height); margin-bottom: 0; }
 h2 { margin-top: 0; text-transform: none; font-size: 1.125rem; min-height: calc(3 * var(--line-height)); }

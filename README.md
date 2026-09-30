@@ -19,6 +19,10 @@ Text je v SVG převeden na křivky, takže odznaky vypadají stejně bez ohledu 
 
 Veškeré texty jsou mimo kód: obsah škály (názvy úrovní, odpovědnost, otázky) v [scale/](scale/) a texty rozhraní rozšíření v [extension/locales/](extension/locales/), jeden JSON na jazyk. Nový jazyk = dva soubory a řádek v `scale/index.json`; rozšíření ho nabídne v přepínači jazyka automaticky. Zdrojem pravdy pro češtinu zůstává [accountability.md](accountability.md).
 
+## Odznak na webu
+
+Kdo nechce instalovat nic, použije tlačítko *Určit úroveň a vytvořit odznak* na [webu](https://kutsosp.github.io/skala-ai-odpovednosti/#odznak). Otevře v dialogu tutéž aplikaci jako rozšíření (`extension/popup.html` v iframe) a zkopíruje odznak do schránky.
+
 ## Rozšíření pro Chrome
 
 Složka [extension/](extension/) obsahuje rozšíření, které položí devět otázek ze škály, určí úroveň a zkopíruje odznak do schránky. Odznak i razítko kreslí rozšíření za běhu písmem JetBrains Mono (razítko ve třech šířkách), takže vypadají všude stejně. Vloží se (⌘V / Ctrl+V) do Google Docs, e-mailu nebo zprávy jako obrázek s odkazem na tuto stránku a v dokumentu se dají zmenšit tažením za rohy. Google Docs odkazy na obrázcích zahazuje, proto rozšíření volitelně přidá textový odkaz pod obrázek.

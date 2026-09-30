@@ -35,6 +35,18 @@
     font-weight: var(--font-weight-bold);
     margin-right: 1ch;
   }
+  /* Odznak: aplikace rozšíření v dialogu */
+  dialog {
+    width: min(50ch, 100vw - 4ch);
+    padding: 0;
+    border: var(--border-thickness) solid var(--text-color);
+    background: var(--background-color);
+    color: var(--text-color);
+  }
+  dialog::backdrop { background: rgba(0, 0, 0, 0.6); }
+  dialog iframe { display: block; width: 100%; height: min(60rem, 80vh); border: none; margin: 0; }
+  dialog form { margin: 0; border-top: var(--border-thickness) solid var(--text-color); }
+  dialog form button { width: 100%; border: none; }
 </style>
 </head>
 <body>
@@ -223,6 +235,19 @@
 </div>
 
 <p>Jelikož AI nemůže být odpovědné, neexistuje částečná odpovědnost autora. Pokud například autor zná původ jen některých čísel, dokument nemůže postoupit do stavu „<strong>OVĚŘENO</strong>“.</p>
+
+<hr>
+
+<h2 id="odznak">Odznak</h2>
+
+<p>Odpovězte na otázky výše a zkopírujte odznak úrovně do dokumentu, e-mailu nebo zprávy. Totéž umí <a href="https://github.com/Kutsosp/skala-ai-odpovednosti#rozšíření-pro-chrome">rozšíření pro Chrome</a> a <a href="https://github.com/Kutsosp/skala-ai-odpovednosti#doplněk-pro-google-docs-sheets-a-slides">doplněk pro Google Docs</a>.</p>
+
+<button onclick="document.getElementById('badge-dialog').showModal()">Určit úroveň a vytvořit odznak</button>
+
+<dialog id="badge-dialog">
+  <iframe src="extension/popup.html" title="Škála AI Odpovědnosti" allow="clipboard-write" loading="lazy"></iframe>
+  <form method="dialog"><button>Zavřít</button></form>
+</dialog>
 
 <hr>
 
