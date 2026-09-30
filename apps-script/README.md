@@ -13,7 +13,7 @@ do skriptu [Code.gs](Code.gs), nasazeného jako *API Executable*. Uživatel jedn
 ## Nasazení změn Code.gs
 
 ```bash
-python3 apps-script/build.py && (cd apps-script/dist && clasp push -f)
+python3 build.py && (cd apps-script/dist && clasp push -f)
 ```
 
 Pak v editoru skriptu (`clasp open-script` v `apps-script/dist`): *Nasadit → Spravovat nasazení →* tužka

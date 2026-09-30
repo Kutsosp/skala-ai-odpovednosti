@@ -158,8 +158,6 @@ def main():
             markup, h = full_svg(lv["n"], lv["name"], lv["responsibility"], lv["when"])
             emit(out, f"{slug}-full", markup, FULL_W, h)
 
-    shutil.copytree(SCALE, EXT / "scale", dirs_exist_ok=True, ignore=shutil.ignore_patterns("README.md"))
-    print("scale/ → extension/scale/")
 
     for px in (16, 48, 128):
         icon = EXT / "icons" / f"icon{px}.svg"
@@ -171,7 +169,7 @@ def main():
     # Hlavička pro README, světlá a tmavá varianta (GitHub přepíná podle nastavení čtenáře)
     (ROOT / "assets").mkdir(exist_ok=True)
     cs = json.loads((SCALE / "cs.json").read_text(encoding="utf-8"))
-    subtitle = "Kolik odpovědnosti autor přebírá za dokument vytvořený s LLM nástroji"
+    subtitle = cs["subtitle"]
     for name, dark in (("title.svg", False), ("title-dark.svg", True)):
         (ROOT / "assets" / name).write_text(title_svg(cs["title"], subtitle, dark), encoding="utf-8")
     print("assets/title.svg, assets/title-dark.svg")

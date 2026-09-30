@@ -19,7 +19,9 @@ jobs:
       - name: JSON files
         run: |
           for f in extension/manifest.json extension/locales/*.json extension/_locales/*/messages.json scale/*.json apps-script/appsscript.json; do python3 -m json.tool "$f" > /dev/null; done
-      - name: odznak.html is up to date
+      - name: Generated files are up to date
         run: |
-          python3 apps-script/build.py
-          git diff --exit-code -- odznak.html
+          python3 build.py
+          git status --porcelain -- odznak.html uroven extension/scale
+          git diff --exit-code -- odznak.html uroven extension/scale
+          test -z "$(git status --porcelain -- uroven extension/scale)"

@@ -19,7 +19,10 @@ let badge = null, stamp = null; // vykreslené canvasy
 
 const label = () => `${level.n} ${level.name}`;
 const stampText = () => `${level.responsibility} ${level.when}`;
-const vars = () => ({ label: label(), title: scale.title, url: scale.url, responsibility: level.responsibility, text: stampText() });
+// Odznak odkazuje na stránku své úrovně (uroven/2-overeno.html), ne na hlavní stránku: ta začíná
+// vlastním razítkem a čtenáře odznaku by mátla.
+const levelUrl = () => `${scale.url}${scale.levelsPath}/${level.n}-${level.slug}.html`;
+const vars = () => ({ label: label(), title: scale.title, url: levelUrl(), responsibility: level.responsibility, text: stampText() });
 
 function showQuestion() {
   const from = scale.levels[Math.floor(index / 3)];
@@ -66,7 +69,7 @@ async function copyImage(c) {
   const { width, height } = cssSize(c);
   const title = t(ui.linkTitle, vars());
   const html =
-    `<a href="${scale.url}" title="${title}">` +
+    `<a href="${levelUrl()}" title="${title}">` +
     `<img src="${await blobToDataUrl(png)}" width="${width}" height="${height}" alt="${t(ui.altText, vars())}" title="${title}">` +
     `</a>`;
   await navigator.clipboard.write([
@@ -85,7 +88,7 @@ function insertImage(c, button) {
   const params = {
     kind: KIND, docId: query.get("doc"), gid: query.get("gid"), range: query.get("range"), pageId: query.get("page"),
     base64: c.toDataURL().split(",")[1], width, height,
-    url: scale.url, label: label(), title: t(ui.linkTitle, vars()), alt: t(ui.altText, vars()),
+    url: levelUrl(), label: label(), title: t(ui.linkTitle, vars()), alt: t(ui.altText, vars()),
   };
   button.disabled = true;
   return runScript("insertBadge", params)

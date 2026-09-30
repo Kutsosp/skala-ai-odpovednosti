@@ -3,7 +3,7 @@
   <img alt="Škála AI Odpovědnosti – Kolik odpovědnosti autor přebírá za dokument vytvořený s LLM nástroji" src="assets/title.svg" width="100%">
 </picture>
 
-<img alt="2 OVĚŘENO – Znám původ každého čísla a souhlasím s každým tvrzením i závěrem. Prosím o reakci na tvrzení a argumenty, ještě než se pustím do ladění formulací, vzhledu a struktury." src="badges/cs/2-overeno-full.svg" width="618">
+<a href="https://kutsosp.github.io/skala-ai-odpovednosti/uroven/2-overeno.html"><img alt="2 OVĚŘENO – Znám původ každého čísla a souhlasím s každým tvrzením i závěrem. Prosím o reakci na tvrzení a argumenty, ještě než se pustím do ladění formulací, vzhledu a struktury." src="badges/cs/2-overeno-full.svg" width="618"></a>
 
 [![build](https://img.shields.io/github/actions/workflow/status/Kutsosp/skala-ai-odpovednosti/ci.yml?branch=main&style=flat-square&label=build)](https://github.com/Kutsosp/skala-ai-odpovednosti/actions/workflows/ci.yml)
 [![web](https://img.shields.io/github/deployments/Kutsosp/skala-ai-odpovednosti/github-pages?style=flat-square&label=web)](https://kutsosp.github.io/skala-ai-odpovednosti/)
@@ -42,13 +42,14 @@ Aplikace položí devět otázek ze škály, určí úroveň a vytvoří **odzna
 | [badges/](badges/) | odznaky a razítka po jazycích, SVG (text jako křivky) a PNG; `build.py` je generuje |
 | [extension/](extension/) | rozšíření pro Chrome; `popup.html` je zároveň aplikace pro web; texty rozhraní v `locales/` |
 | [apps-script/](apps-script/) | Apps Script, který za rozšíření vkládá obrázek do Google dokumentů; nastavení v [README](apps-script/README.md) |
-| `odznak.html` | aplikace v jednom souboru pro dialog na webu, generuje `apps-script/build.py` |
+| [uroven/](uroven/) | stránka pro každou úroveň; na ni odkazují odznaky a razítka |
+| `odznak.html` | aplikace v jednom souboru pro dialog na webu |
 
-Nový jazyk: `scale/<kód>.json`, `extension/locales/<kód>.json` a řádek v `scale/index.json`.
+Stránky úrovní, `odznak.html` a kopii textů v rozšíření generuje `build.py`. Nový jazyk: `scale/<kód>.json`, `extension/locales/<kód>.json` a řádek v `scale/index.json`.
 
 ```bash
+python3 build.py               # uroven/, odznak.html, extension/scale, apps-script/dist; pak (cd apps-script/dist && clasp push -f)
 python3 badges/build.py        # odznaky, ikony, hlavička README (fonttools + Google Chrome)
-python3 apps-script/build.py   # odznak.html a apps-script/dist; pak (cd apps-script/dist && clasp push -f)
 git tag v1.1.0 && git push --tags   # GitHub Action přiloží zip rozšíření k vydání
 ```
 
