@@ -1,4 +1,5 @@
 {
   "name": { "message": "Škála AI Odpovědnosti" },
-  "description": { "message": "Odpovězte na devět otázek, zjistěte úroveň odpovědnosti za svůj dokument a vložte odznak do Google Docs, e-mailu nebo zprávy. Podle Škály AI Odpovědnosti Petera Kutsose (kutsosp.github.io/skala-ai-odpovednosti). Styl: The Monospace Web (Oskar Wickström)." }
+  "description": { "message": "Odpovězte na devět otázek, zjistěte úroveň odpovědnosti za svůj dokument a vložte odznak do Google Docs, e-mailu nebo zprávy. Podle Škály AI Odpovědnosti Petera Kutsose (kutsosp.github.io/skala-ai-odpovednosti). Styl: The Monospace Web (Oskar Wickström)." },
+  "menuLabel": { "message": "AI Škála", "description": "Položka v horní nabídce Google Docs" }
 }

@@ -16,7 +16,7 @@ na škálu. Nasazuje se dvěma způsoby ze stejného zdroje (`python3 addon/buil
 
 ## A. Rozšíření pro Chrome → Docs (Zotero-style)
 
-Rozšíření přidá do horní nabídky Docs položku „Škála“, ta otevře panel s aplikací a vložení jde přes
+Rozšíření přidá do horní nabídky Docs položku „AI Škála“, ta otevře panel s aplikací a vložení jde přes
 Apps Script API. Uživatel jednou potvrdí přístup Googlu (stejně jako u Zotera). Jednorázové nastavení:
 
 1. **Google Cloud projekt** (console.cloud.google.com → nový projekt). Zapnout *Apps Script API*

@@ -1,4 +1,4 @@
-// Google Docs: přidá do horní nabídky položku „Škála“ (po vzoru Zotera) a po kliknutí otevře
+// Google Docs: přidá do horní nabídky položku „AI Škála“ (po vzoru Zotera) a po kliknutí otevře
 // panel s aplikací rozšíření (popup.html?host=docs). Vložení do dokumentu jde přes google.js.
 //
 // Závislost na značkování Googlu je držena na minimu: id „docs-menubar“ (stabilní roky) a
@@ -7,7 +7,7 @@
 
 const MENU_ID = "skala-menu";
 const PANEL_ID = "skala-panel";
-const LABEL = "Škála";
+const LABEL = chrome.i18n.getMessage("menuLabel") || "AI Škála";
 
 const docId = () => location.pathname.match(/\/document\/d\/([^/]+)/)?.[1];
 

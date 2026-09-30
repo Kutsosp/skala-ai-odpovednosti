@@ -14,7 +14,7 @@
   "permissions": ["clipboardWrite", "identity"],
   "host_permissions": ["https://script.googleapis.com/"],
   "oauth2": {
-    "client_id": "REPLACE_WITH_OAUTH_CLIENT_ID.apps.googleusercontent.com",
+    "client_id": "947530174977-ac5fidun55366a898gfbustt78nmuv9p.apps.googleusercontent.com",
     "scopes": ["https://www.googleapis.com/auth/documents"]
   },
   "content_scripts": [
