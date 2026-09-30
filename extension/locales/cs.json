@@ -24,6 +24,7 @@
   "atCursor": "Ke kurzoru",
   "inserted": "Vloženo",
   "insertHint_docs": "Obrázek se vloží s odkazem na škálu a dá se zmenšit tažením za rohy.",
+  "insertHint_docsapi": "Obrázek se vloží na první řádek dokumentu s odkazem na škálu a dá se zmenšit tažením za rohy. Při prvním použití vás Google požádá o souhlas s úpravou dokumentů.",
   "insertHint_slides": "Obrázek se vloží na aktuální snímek s odkazem na škálu.",
   "insertHint_sheets": "Obrázek se vloží k vybrané buňce. Obrázky v Tabulkách nemohou být odkazem, proto se odkaz zapíše jako text do první volné buňky pod ním.",
   "restart": "Začít znovu",

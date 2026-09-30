@@ -29,6 +29,9 @@ Složka [extension/](extension/) obsahuje rozšíření, které položí devět 
 
 Instalace: `chrome://extensions` → zapnout *Režim pro vývojáře* → *Načíst rozbalené* → vybrat složku `extension/`.
 
-## Doplněk pro Google Docs, Sheets a Slides
+## Google Docs, Sheets a Slides
 
-Google Docs zahazuje odkazy na vložených obrázcích, proto existuje i doplněk ([addon/](addon/)), který vloží odznak přímo do dokumentu s odkazem na škálu. Postranní panel doplňku je tatáž aplikace jako okno rozšíření (sestavuje ji `python3 addon/build.py` ze složky `extension/`). Nasazení a zveřejnění: [addon/README.md](addon/README.md).
+Google Docs zahazuje odkazy na vložených obrázcích, proto se tam odznak vkládá přes Apps Script ([addon/Code.gs](addon/Code.gs)), který obrázek uloží přímo do dokumentu s odkazem. Dvě cesty k němu:
+
+- **Rozšíření pro Chrome v Docs** (po vzoru Zotera): rozšíření přidá do horní nabídky Docs položku *Škála*, ta otevře panel s aplikací a vloží odznak na první řádek dokumentu. Uživatel jednou potvrdí Googlu přístup k dokumentům. Vyžaduje jednorázové nastavení Google Cloud projektu, viz [addon/README.md](addon/README.md).
+- **Doplněk s postranním panelem** pro Sheets a Slides (a pro Docs bez rozšíření): menu *Rozšíření → Škála AI Odpovědnosti*. Panel je tatáž aplikace jako okno rozšíření (`python3 addon/build.py`).

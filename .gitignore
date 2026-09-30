@@ -1,2 +1,3 @@
 addon/dist/.clasp.json
+addon/dist-api/.clasp.json
 __pycache__/

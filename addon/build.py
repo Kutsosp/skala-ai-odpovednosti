@@ -15,7 +15,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 EXT, SCALE, ADDON = ROOT / "extension", ROOT / "scale", ROOT / "addon"
-DIST = ADDON / "dist"
+DIST, API = ADDON / "dist", ADDON / "dist-api"
 FONTS = '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;800&display=swap">'
 
 
@@ -58,6 +58,12 @@ def main():
     for f in ("Code.gs", "appsscript.json"):
         shutil.copy(ADDON / f, DIST / f)
     print(f"addon/dist/: sidebar.html ({len(html) // 1024} kB), Code.gs, appsscript.json")
+
+    # Tentýž Code.gs jako API executable pro rozšíření (Zotero-style): jiný manifest, bez panelu.
+    API.mkdir(exist_ok=True)
+    shutil.copy(ADDON / "Code.gs", API / "Code.gs")
+    shutil.copy(ADDON / "appsscript-api.json", API / "appsscript.json")
+    print("addon/dist-api/: Code.gs, appsscript.json")
 
 
 if __name__ == "__main__":

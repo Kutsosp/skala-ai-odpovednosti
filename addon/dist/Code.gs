@@ -40,16 +40,17 @@ function getHost() {
 }
 
 /**
- * Vloží PNG odznak do dokumentu.
- * @param {{base64:string,width:number,height:number,where:string,url:string,label:string,title:string,alt:string}} b
+ * Vloží PNG odznak do dokumentu. Volá se z postranního panelu (google.script.run) nebo přes
+ * Apps Script API z rozšíření pro Chrome; to posílá docId, protože zde není aktivní dokument.
+ * @param {{base64:string,width:number,height:number,where:string,url:string,label:string,title:string,alt:string,docId?:string}} b
  */
 function insertBadge(b) {
   const blob = Utilities.newBlob(Utilities.base64Decode(b.base64), "image/png", `${b.label}.png`);
+  if (b.docId) return insertIntoDoc(blob, b, DocumentApp.openById(b.docId));
   ({ docs: insertIntoDoc, sheets: insertIntoSheet, slides: insertIntoSlide })[getHost()](blob, b);
 }
 
-function insertIntoDoc(blob, b) {
-  const doc = DocumentApp.getActiveDocument();
+function insertIntoDoc(blob, b, doc = DocumentApp.getActiveDocument()) {
   let img = null;
   if (b.where === "cursor" && doc.getCursor()) img = doc.getCursor().insertInlineImage(blob);
   if (!img) img = doc.getBody().insertParagraph(0, "").appendInlineImage(blob); // první řádek dokumentu

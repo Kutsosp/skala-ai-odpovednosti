@@ -1,16 +1,20 @@
 import { availableLanguages, pickLanguage, rememberLanguage, applyUi, t } from "./i18n.js";
 import { renderBadge, renderStamp, toBlob, cssSize } from "./render.js";
+import { runScript } from "./google.js";
 
-// Stejný kód běží ve dvou hostitelích: okno rozšíření (kopíruje do schránky) a postranní panel
-// doplňku Google Docs / Sheets / Slides (vkládá přes google.script.run, viz addon/Code.gs).
-const HOST = document.body.dataset.host || "extension";
+// Stejný kód běží ve třech hostitelích:
+//  extension – okno rozšíření a dialog na webu: kopíruje do schránky
+//  docs      – panel vložený rozšířením do Google Docs: vkládá přes Apps Script API (google.js)
+//  addon     – postranní panel doplňku Google Docs/Sheets/Slides: vkládá přes google.script.run
+const query = new URLSearchParams(location.search);
+const HOST = query.get("host") || document.body.dataset.host || "extension";
 const $ = (id) => document.getElementById(id);
 let scale, ui, questions; // aktuální jazyk
 let index = 0;
 let level = null;
 let cols = 60; // šířka textu razítka ve znacích
 let where = "start"; // doplněk v Docs: začátek dokumentu / u kurzoru
-let editor = null; // doplněk: "docs" | "sheets" | "slides"
+let editor = HOST === "docs" ? "docs" : null; // "docs" | "sheets" | "slides"
 let badge = null, stamp = null; // vykreslené canvasy
 
 const label = () => `${level.n} ${level.name}`;
@@ -74,22 +78,26 @@ async function copyImage(c) {
   ]);
 }
 
-// Doplněk: obrázek jde jako base64 do Apps Scriptu, který ho uloží přímo do dokumentu s odkazem.
+// Vložení do dokumentu: obrázek jde jako base64 do Apps Scriptu (addon/Code.gs), který ho uloží
+// přímo do dokumentu s odkazem. Z doplňku přes google.script.run, z Docs panelu přes Apps Script API.
 function insertImage(c, button) {
   const { width, height } = cssSize(c);
-  const base64 = c.toDataURL().split(",")[1];
-  return new Promise((resolve, reject) =>
-    google.script.run
-      .withSuccessHandler(resolve)
-      .withFailureHandler(reject)
-      .insertBadge({ base64, width, height, where, url: scale.url, label: label(), title: t(ui.linkTitle, vars()), alt: t(ui.altText, vars()) }),
-  ).then(() => flash(button, ui.inserted), (e) => flash(button, e.message));
+  const params = {
+    base64: c.toDataURL().split(",")[1], width, height, where, url: scale.url,
+    label: label(), title: t(ui.linkTitle, vars()), alt: t(ui.altText, vars()), docId: query.get("doc"),
+  };
+  const run =
+    HOST === "addon"
+      ? new Promise((resolve, reject) => google.script.run.withSuccessHandler(resolve).withFailureHandler(reject).insertBadge(params))
+      : runScript("insertBadge", params);
+  button.disabled = true;
+  return run.then(() => flash(button, ui.inserted), (e) => flash(button, e.message, 4000)).finally(() => (button.disabled = false));
 }
 
-function flash(button, text) {
+function flash(button, text, ms = 1500) {
   const original = button.textContent;
   button.textContent = text;
-  setTimeout(() => (button.textContent = original), 1500);
+  setTimeout(() => (button.textContent = original), ms);
 }
 
 function useLanguage(lang) {
@@ -99,7 +107,7 @@ function useLanguage(lang) {
   document.title = $("title").textContent = scale.title;
   applyUi(ui, { title: scale.title, url: scale.url });
   $("lang").value = lang.code;
-  if (editor) $("insert-hint").textContent = ui[`insertHint_${editor}`] ?? "";
+  if (editor) $("insert-hint").textContent = ui[`insertHint_${HOST === "docs" ? "docsapi" : editor}`] ?? "";
   if (level) finish(level.n); // překreslit výsledek v novém jazyce
   else showQuestion();
 }
@@ -125,9 +133,11 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "n" || e.key === "N") $("no").click();
 });
 
-if (HOST === "addon") {
+if (HOST !== "extension") {
   $("copy-actions").hidden = true;
   $("insert-actions").hidden = false;
+}
+if (HOST === "addon") {
   google.script.run.withSuccessHandler((host) => {
     editor = host;
     $("place").hidden = host !== "docs";
