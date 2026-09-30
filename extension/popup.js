@@ -140,4 +140,4 @@ $("lang").onchange = () => {
   rememberLanguage($("lang").value);
   useLanguage(languages.find((l) => l.code === $("lang").value));
 };
-useLanguage(pickLanguage(languages));
+useLanguage(languages.find((l) => l.code === query.get("lang")) || pickLanguage(languages)); // ?lang= vynutí jazyk (anglická stránka)

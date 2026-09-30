@@ -1,0 +1,5 @@
+{
+  "name": { "message": "AI Accountability Scale" },
+  "description": { "message": "Answer nine questions, find the level of responsibility you take for your document and put the badge into Google Docs, an e-mail or a message. Based on Peter Kutsos's AI Accountability Scale (kutsosp.github.io/skala-ai-odpovednosti). Style: The Monospace Web (Oskar Wickström)." },
+  "menuLabel": { "message": "AI Scale", "description": "Menu item in Google Docs, Sheets and Slides" }
+}

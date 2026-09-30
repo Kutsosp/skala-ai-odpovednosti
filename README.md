@@ -10,7 +10,7 @@
 [![rozšíření](https://img.shields.io/github/manifest-json/v/Kutsosp/skala-ai-odpovednosti?filename=extension%2Fmanifest.json&style=flat-square&label=rozšíření)](https://github.com/Kutsosp/skala-ai-odpovednosti/releases)
 [![škála](https://img.shields.io/badge/škála-v1.0-black?style=flat-square)](accountability.md)
 
-Autor umístěním dokumentu na škálu (PŘEPOSLÁNO, NÁSTŘEL, OVĚŘENO, PODEPSÁNO) říká, za co v něm odpovídá a na co chce zpětnou vazbu. Definice úrovní a otázky: [accountability.md](accountability.md) · [web](https://kutsosp.github.io/skala-ai-odpovednosti/).
+Autor umístěním dokumentu na škálu (PŘEPOSLÁNO, NÁSTŘEL, OVĚŘENO, PODEPSÁNO) říká, za co v něm odpovídá a na co chce zpětnou vazbu. Definice úrovní a otázky: [accountability.md](accountability.md) · [web](https://kutsosp.github.io/skala-ai-odpovednosti/) · [English](https://kutsosp.github.io/skala-ai-odpovednosti/en/) (první překlad, 1 DRAFT).
 
 ## Jak označit dokument
 

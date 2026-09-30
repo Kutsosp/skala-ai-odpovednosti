@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Accountability Scale</title>
+<meta name="description" content="Levels of responsibility an author takes for a document written with LLM tools.">
+<link rel="icon" type="image/png" sizes="128x128" href="../extension/icons/icon128.png">
+<link rel="apple-touch-icon" href="../extension/icons/icon128.png">
+<link rel="stylesheet" href="../reset.css">
+<link rel="stylesheet" href="../index.css">
+<style>
+  /* Citations: left rule, muted attribution */
+  blockquote {
+    margin: var(--line-height) 0;
+    padding: 0 0 0 2ch;
+    border-left: var(--border-thickness) solid var(--text-color);
+  }
+  blockquote > :last-child { margin-bottom: 0; }
+  blockquote .attribution {
+    color: var(--text-color-alt);
+  }
+  /* Document status stamp */
+  .disclaimer {
+    border: var(--border-thickness) solid var(--text-color);
+    background: var(--background-color-alt);
+    padding: var(--line-height) 2ch;
+    margin: var(--line-height) 0;
+  }
+  .disclaimer p { margin: 0; }
+  ul.spaced > li { margin-bottom: var(--line-height); }
+  h2 { margin-top: calc(3 * var(--line-height)); }
+  h3 { margin-top: calc(2 * var(--line-height)); }
+  figure.diagram { margin: var(--line-height) 0; overflow-x: auto; }
+  .disclaimer .stamp {
+    text-transform: uppercase;
+    font-weight: var(--font-weight-bold);
+    margin-right: 1ch;
+  }
+  /* Badge: the extension app in a dialog */
+  dialog {
+    width: min(50ch, 100vw - 4ch);
+    padding: 0;
+    border: var(--border-thickness) solid var(--text-color);
+    background: var(--background-color);
+    color: var(--text-color);
+  }
+  dialog::backdrop { background: rgba(0, 0, 0, 0.6); }
+  dialog iframe { display: block; width: 100%; height: min(60rem, 80vh); border: none; margin: 0; }
+  dialog form { margin: 0; border-top: var(--border-thickness) solid var(--text-color); }
+  dialog form button { width: 100%; border: none; }
+</style>
+</head>
+<body>
+
+<table class="header">
+  <tr>
+    <td colspan="2" rowspan="2" class="width-auto">
+      <h1 class="title">AI Accountability Scale</h1>
+      <span class="subtitle">How much responsibility an author takes for a&nbsp;document written with LLM tools</span>
+    </td>
+    <th>Version</th>
+    <td class="width-min">v1.0</td>
+  </tr>
+  <tr>
+    <th>Updated</th>
+    <td class="width-min"><time style="white-space: pre;">30 Sep 2026</time></td>
+  </tr>
+  <tr>
+    <th class="width-min">Author</th>
+    <td class="width-auto">Peter Kutsos</td>
+    <th class="width-min">Status</th>
+    <td>1&nbsp;DRAFT</td>
+  </tr>
+</table>
+
+<div class="disclaimer">
+  <p><span class="stamp">1 DRAFT</span> The direction is relevant. I&nbsp;understand every sentence and can put it in my own words. Please respond to the direction before I&nbsp;start refining the details. This is a&nbsp;first translation of the Czech original; the wording has not been reviewed yet.</p>
+</div>
+
+<p>The AI Accountability Scale is a&nbsp;system meant to help teams bring LLM tools into their everyday collaboration. By placing a&nbsp;document on the scale, the author gives an honest assessment of the effort they put into it and communicates that assessment to colleagues.</p>
+
+<p>Recipients can then fairly decide which parts of the document to give feedback on and where to expect changes from the author first.</p>
+
+<h2>Contents</h2>
+
+<nav>
+  <ul>
+    <li><a href="#quotes">Quotes</a></li>
+    <li><a href="#purpose">Purpose</a></li>
+    <li><a href="#levels">The four levels</a></li>
+    <li><a href="#commit">Which level to commit to?</a></li>
+    <li><a href="#badge">Badge</a></li>
+    <li><a href="#sources">Sources and further reading</a></li>
+  </ul>
+</nav>
+
+<hr>
+
+<h2 id="quotes">Quotes</h2>
+
+<blockquote>
+  <p>For the longest time, writing was more expensive than reading. If you encountered a body of written text, you could be sure that at the very least, a human spent some time writing it down.</p>
+  <p class="attribution">– Alex Martsinovich, <a href="https://distantprovince.by/posts/its-rude-to-show-ai-output-to-people/">It's rude to show AI output to people</a> (via <a href="https://danny.is/notes/a-mini-rant-on-slop/">danny.is</a>)</p>
+</blockquote>
+
+<blockquote>
+  <p>I connect AI workslop to an older problem in workplace ethics: effort-withholding, as in shirking or slacking. Workslop is often perceived as continuous with these practices because it can shift burdens onto others while appearing to spare the sender effort.</p>
+  <p class="attribution">– Karl de Fine Licht, <a href="https://link.springer.com/article/10.1007/s13347-026-01164-8">AI Workslop: The Moral Significance of Withholding Effort</a>, Philosophy &amp; Technology (2026)</p>
+</blockquote>
+
+<blockquote>
+  <p>{...} workslop uniquely uses machines to offload cognitive work to another human being. When coworkers receive workslop, they are often required to take on the burden of decoding the content, inferring missed or false context. A cascade of effortful and complex decision-making processes may follow, including rework and uncomfortable exchanges with colleagues.</p>
+  <p class="attribution">– Kate Niederhoffer et al., <a href="https://hbr.org/2025/09/ai-generated-workslop-is-destroying-productivity">AI-Generated 'Workslop' Is Destroying Productivity</a>, Harvard Business Review (2025)</p>
+</blockquote>
+
+<blockquote>
+  <p>He created a situation where I had to decide whether I would rewrite it myself, make him [the sender] rewrite it, or just call it good enough.</p>
+  <p class="attribution">– Kate Niederhoffer et al., <a href="https://hbr.org/2025/09/ai-generated-workslop-is-destroying-productivity">AI-Generated 'Workslop' Is Destroying Productivity</a>, Harvard Business Review (2025)</p>
+</blockquote>
+
+<hr>
+
+<h2 id="purpose">Purpose</h2>
+
+<ul class="spaced">
+  <li>Make clear what kind of feedback the author and the work are ready for (a&nbsp;rough draft can be criticised for its overall idea, but not yet for its style)</li>
+  <li>Prevent information cascades</li>
+  <li>Keep responsibility with the author</li>
+  <li>Communicate the effort the author put into the work, efficiently and honestly</li>
+  <li>Let the author share early versions and get feedback on them without wasting time or provoking needlessly negative reactions</li>
+  <li>Give the reader an idea of what to focus on in their feedback and what the author will still finish</li>
+</ul>
+
+<hr>
+
+<h2 id="levels">The four levels</h2>
+
+<p>Write one of them in capitals on the first line of the document, e-mail or message:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th class="width-min">#</th>
+      <th class="width-min">Level</th>
+      <th>What I&nbsp;am responsible for</th>
+      <th>When to use</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td><strong>FORWARDED</strong></td>
+      <td>I&nbsp;take no responsibility for the content. I&nbsp;made no substantial changes, or I&nbsp;haven't read it.</td>
+      <td>Use when the recipient has no access to LLM tools; otherwise they could have generated it themselves.</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td><strong>DRAFT</strong></td>
+      <td>The direction is relevant. I&nbsp;understand every sentence and can put it in my own words.</td>
+      <td>Please respond to the direction before I&nbsp;start refining the details.</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td><strong>VERIFIED</strong></td>
+      <td>I&nbsp;know where every number comes from and I&nbsp;agree with every claim and conclusion.</td>
+      <td>Please respond to the claims and arguments before I&nbsp;start refining the wording, layout and structure.</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td><strong>SIGNED</strong></td>
+      <td>I&nbsp;take responsibility for the layout, the structure and every sentence.</td>
+      <td>I&nbsp;sign my name to this document and consider it finished.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="commit">Which level to commit to?</h2>
+
+<figure class="diagram">
+<pre>
+┌────────────────┐
+│ 0 FORWARDED    │  responsible for: nothing
+└───────┬────────┘
+        │  YES to:
+        │   1. Have you read all of it?
+        │   2. Is the direction relevant?
+        │   3. Can you put every sentence in your own words?
+        ▼
+┌────────────────┐
+│ 1 DRAFT        │  responsible for: the direction
+└───────┬────────┘
+        │  YES to:
+        │   4. Do you know where every number comes from?
+        │   5. Do you agree with every claim?
+        │   6. Do the conclusions follow from the claims?
+        ▼
+┌────────────────┐
+│ 2 VERIFIED     │  responsible for: numbers, claims and conclusions
+└───────┬────────┘
+        │  YES to:
+        │   7. Is every sentence worded as you would word it?
+        │   8. Is the structure logical and clear?
+        │   9. Is the appearance presentable?
+        ▼
+┌────────────────┐
+│ 3 SIGNED       │  responsible for: everything; I sign my name to the document
+└────────────────┘
+</pre>
+</figure>
+
+<p>To move up a&nbsp;level, you must answer YES to every question.</p>
+
+<p>Answering YES means the author is <strong>responsible</strong> for that aspect of the work and accepts feedback and criticism on it.</p>
+
+<p><strong>0 FORWARDED → 1 DRAFT</strong></p>
+
+<div>
+  <label><input type="checkbox"> Have you read all of it?</label><br>
+  <label><input type="checkbox"> Is the direction of the document relevant?</label><br>
+  <label><input type="checkbox"> Do you understand every sentence and can you put it in your own words?</label>
+</div>
+
+<p><strong>1 DRAFT → 2 VERIFIED</strong></p>
+
+<div>
+  <label><input type="checkbox"> Do you know where every number comes from?</label><br>
+  <label><input type="checkbox"> Do you agree with every claim?</label><br>
+  <label><input type="checkbox"> Do you agree with every conclusion? Do the conclusions follow from the claims?</label>
+</div>
+
+<p><strong>2 VERIFIED → 3 SIGNED</strong></p>
+
+<div>
+  <label><input type="checkbox"> Is every sentence worded the way you would word it yourself?</label><br>
+  <label><input type="checkbox"> Is the structure of the document logical and clear?</label><br>
+  <label><input type="checkbox"> Is the document's appearance presentable?</label>
+</div>
+
+<p>Since AI cannot be held responsible, there is no partial responsibility for the author. If, for example, the author knows where only some of the numbers come from, the document cannot move to <strong>VERIFIED</strong>.</p>
+
+<hr>
+
+<h2 id="badge">Badge</h2>
+
+<p>Answer the questions above and copy the level badge into your document, e-mail or message. The <a href="https://github.com/Kutsosp/skala-ai-odpovednosti#rozšíření-pro-chrome">Chrome extension</a> does the same, and in Google Docs, Sheets and Slides it inserts the badge directly into the document.</p>
+
+<button onclick="document.getElementById('badge-dialog').showModal()">Determine the level and create a badge</button>
+
+<dialog id="badge-dialog">
+  <iframe src="../odznak.html?lang=en" title="AI Accountability Scale" allow="clipboard-write" loading="lazy"></iframe>
+  <form method="dialog"><button>Close</button></form>
+</dialog>
+
+<hr>
+
+<h2 id="sources">Sources and further reading</h2>
+
+<h3>Workslop</h3>
+
+<p><strong>HBR (start here):</strong></p>
+<ul>
+  <li><a href="https://archive.is/20250923143154/https://hbr.org/2025/09/ai-generated-workslop-is-destroying-productivity">AI-Generated 'Workslop' Is Destroying Productivity</a> (HBR, 2025)</li>
+  <li><a href="https://archive.ph/20260320035918/https://hbr.org/2026/01/why-people-create-ai-workslop-and-how-to-stop-it">Why People Create AI Workslop and How to Stop It</a> (HBR, 2026)</li>
+</ul>
+
+<p><strong>Academic:</strong></p>
+<ul>
+  <li><a href="https://link.springer.com/article/10.1007/s13347-026-01164-8">AI Workslop: The Moral Significance of Withholding Effort</a> (Philosophy &amp; Technology, Springer)</li>
+  <li><a href="https://osf.io/preprints/psyarxiv/5f78h_v1/">Workslop: Examining the prevalence, antecedents and consequences of low-quality AI-generated content at work</a> (OSF / PsyArXiv preprint, 2026)</li>
+</ul>
+
+<p><strong>Press:</strong></p>
+<ul>
+  <li><a href="https://www.axios.com/2025/09/24/ai-workslop-workplace-efficiency-study">AI "workslop" is crushing workplace efficiency, study finds</a> (Axios)</li>
+  <li><a href="https://www.cnn.com/2025/09/26/business/ai-workslop-nightcap">AI isn't taking over your job, but 'workslop' is</a> (CNN Business)</li>
+  <li><a href="https://futurism.com/future-society/ai-productivity-research">AI at Work Is Creating Mountains of Slop That Humans Have to Fix, Stanford Research Finds</a> (Futurism)</li>
+</ul>
+
+<p><strong>Studies:</strong></p>
+<ul>
+  <li><a href="https://letsdatascience.com/blog/developers-thought-ai-made-them-faster-the-data-said-otherwise">AI Coding Tools Made Developers 19% Slower: METR Study</a> (Let's Data Science)</li>
+  <li><a href="https://daniel.haxx.se/blog/2025/07/14/death-by-a-thousand-slops/">Death by a thousand slops</a> (Daniel Stenberg, 2025)</li>
+</ul>
+
+<h3>Epistemic status and effort</h3>
+
+<p>According to Urban Dictionary:</p>
+
+<blockquote>
+  <p>The epistemic status is a short disclaimer at the top of a post that explains how confident the author is in the contents of the post, how much reputation the author is willing to stake on it, what sorts of tests the thesis has passed. It should give a reader a sense of how seriously they should take the post.</p>
+</blockquote>
+
+<ul>
+  <li><a href="https://www.lesswrong.com/posts/oDy27zfRf8uAbJR6M/epistemic-effort">Epistemic Effort</a> (Raemon, LessWrong, 2016)</li>
+  <li><a href="https://devonzuegel.com/epistemic-statuses-are-lazy-and-that-is-a-good-thing">Epistemic statuses are lazy, and that is a good thing</a> (Devon Zuegel)</li>
+  <li><a href="https://www.webcitation.org/6DuYcqyQ3">Epistemic State</a> (muflax.com/episteme, origin of the epistemic-status convention; stable copy: <a href="http://web.archive.org/web/20120606020834/http://muflax.com:80/episteme/">Wayback Machine</a>)</li>
+</ul>
+
+<h3>AI and accountability</h3>
+
+<ul>
+  <li><a href="https://jarche.com/2023/06/the-button/">the button</a> (Harold Jarche, on Ethan Mollick's "The Button")</li>
+  <li><a href="https://distantprovince.by/posts/its-rude-to-show-ai-output-to-people/">It's rude to show AI output to people</a> (Alex Martsinovich)</li>
+  <li><a href="https://unskilled.blog/posts/brandolinis-law-in-the-gpt-era/">Brandolini's Law in the GPT Era</a> (Unskilled)</li>
+</ul>
+
+<hr>
+
+<p style="color: var(--text-color-alt);"><a href="../">Česká verze</a> (the original). Style: <a href="https://owickstrom.github.io/the-monospace-web/">The Monospace Web</a> (Oskar Wickström, MIT). Source: <a href="https://github.com/Kutsosp/skala-ai-odpovednosti">github.com/Kutsosp/skala-ai-odpovednosti</a>.</p>
+
+</body>
+</html>
