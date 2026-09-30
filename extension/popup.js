@@ -80,7 +80,6 @@ function useLanguage(lang) {
   questions = scale.questions.flat();
   document.documentElement.lang = lang.code;
   document.title = $("title").textContent = scale.title;
-  $("version").textContent = `v${scale.scaleVersion}`;
   applyUi(ui, { title: scale.title, url: scale.url });
   $("lang").value = lang.code;
   if (level) finish(level.n); // překreslit výsledek v novém jazyce

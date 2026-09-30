@@ -1,6 +1,5 @@
 {
   "subtitle": "Jakou odpovědnost přebírám za tento dokument?",
-  "scale": "Škála",
   "language": "Jazyk",
   "questionOf": "Otázka {n} z {total}",
   "yes": "Ano",
@@ -26,5 +25,5 @@
   "linkTitle": "{label} – {title}. {responsibility} Kliknutím otevřete vysvětlení škály.",
   "altText": "{label} – {title}",
   "plainText": "{label} – {text} ({url})",
-  "footerHtml": "Zdroj: <a href=\"{url}\" target=\"_blank\" rel=\"noopener\">{title}</a> (Peter Kutsos). Styl: <a href=\"https://owickstrom.github.io/the-monospace-web/\" target=\"_blank\" rel=\"noopener\">The Monospace Web</a>."
+  "footerHtml": "<a href=\"{url}\" target=\"_blank\" rel=\"noopener\">{title} →</a>"
 }
