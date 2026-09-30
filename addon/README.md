@@ -23,7 +23,7 @@ Apps Script API. Uživatel jednou potvrdí přístup Googlu (stejně jako u Zote
    (APIs & Services → Library).
 2. **OAuth consent screen**: External, režim Testing, přidat testovací uživatele (max. 100). Scope
    `https://www.googleapis.com/auth/documents`.
-3. **OAuth client ID** typu *Chrome Extension*, Item ID = `mnkcmhbncdclkfacojppflcljmaeoabe`
+3. **OAuth client ID** typu *Chrome Extension*, Item ID = `lpejomidbnlogocdgapmdmdolpefdkhc`
    (pevné ID rozšíření dané polem `key` v manifest.json). Client ID zapsat do `extension/manifest.json`
    → `oauth2.client_id`.
 4. **Apps Script projekt**: `python3 addon/build.py && cd addon/dist-api && clasp push -f` (build vytvoří

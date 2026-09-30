@@ -4,7 +4,7 @@
   "version": "1.1.0",
   "description": "__MSG_description__",
   "default_locale": "cs",
-  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0epNM1RkacNnlmCFTeMzjnSiMGvFR58e/3vAK3y8uKl66JONuUcawNgJx1aY80CnoCqLm4q3dr2qjXncnT09GZZw9hwTlXKCMNE86ZBO9hufXWL2EL9U2QDHy72IFu055SaxB29st2Kw4OHvqq5y2T5mCRPx6ZNHtuVKpdNQtagAK74kr5oVYBsiPVbLKQ/3YBn4s4nq59y6bLQh0k2l8T2g4of+5Pe3BtEaJZOKt9HmoQykVwIATJTHMwjtyrX5x5Oi17TOxC7ohYmb3Cq2aP3k3LbSgOI8QIs6URZAFgvUK57n9r7F0m48AvJrYaopRQOXGw3WPmlzW2FKPDmo5QIDAQAB",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAw98oE1H2kEq1Dpx/iwWoxBcJpbFomIKLuEcHAZGsd9w8C7Q0YBSiL/Nlu6U2k83hvWMuwZ7opKjHGNAp9DZsj/SUEG6Iats5j2UvFZOGIdNkCoLC6tPSzwc6zL2QspMD2hg0gQuSPm1YaAamht8i42+TMoXsJ6CROYaU+NpNRv3XhhLy4o0EPQcMZd8vKWHK2t1q6dAhBMGvZzBVchNkZifzng81LKKzQ3a7AFNF9BgtzIAWjiDvw/zMt/VPP3kn4mNjcadNCxQl0VPACocpwkRvVIAeBmTeCUTiJ/qX6IDuj5kTPkIdTIUroVbfkEQyc+esOP6sFKcH9p6ld97JnQIDAQAB",
   "action": {
     "default_popup": "popup.html",
     "default_title": "__MSG_name__",

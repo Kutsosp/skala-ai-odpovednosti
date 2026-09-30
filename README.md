@@ -22,7 +22,7 @@ Google Docs zahazuje odkazy na obrázcích vložených ze schránky, proto Docs 
 2. `chrome://extensions` → zapnout *Režim pro vývojáře* → *Načíst rozbalené* → vybrat rozbalenou složku.
 3. Pro vkládání do Google Docs vás Google při prvním použití požádá o souhlas s úpravou dokumentů. Dokud je aplikace v testovacím režimu, musí být váš účet mezi testovacími uživateli (přidává správce Cloud projektu, max. 100).
 
-ID rozšíření je pevné (`mnkcmhbncdclkfacojppflcljmaeoabe`, dané polem `key` v manifestu), aby fungovalo přihlášení k Googlu na každém počítači stejně.
+ID rozšíření je pevné (`lpejomidbnlogocdgapmdmdolpefdkhc`, dané polem `key` v manifestu), aby fungovalo přihlášení k Googlu na každém počítači stejně.
 
 ## Struktura repozitáře
 
