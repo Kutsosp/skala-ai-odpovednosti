@@ -1,34 +1,33 @@
-import { BASE_URL, LEVELS, QUESTIONS } from "./scale.js";
+import { availableLanguages, pickLanguage, rememberLanguage, applyUi, t } from "./i18n.js";
 import { renderBadge, renderStamp, toBlob, cssSize } from "./render.js";
 
 const $ = (id) => document.getElementById(id);
-const WIDTHS = { narrow: 40, medium: 60, wide: 80 }; // šířka textu razítka ve znacích
+let scale, ui, questions; // aktuální jazyk
 let index = 0;
 let level = null;
-let cols = WIDTHS.medium;
+let cols = 60; // šířka textu razítka ve znacích
 let badge = null, stamp = null; // vykreslené canvasy
-
-function showQuestion() {
-  const from = LEVELS[Math.floor(index / 3)];
-  const to = LEVELS[Math.floor(index / 3) + 1];
-  $("step").textContent = `Otázka ${index + 1} z ${QUESTIONS.length}`;
-  $("transition").textContent = `${from.n} ${from.name} → ${to.n} ${to.name}`;
-  $("question").textContent = QUESTIONS[index];
-}
 
 const label = () => `${level.n} ${level.name}`;
 const stampText = () => `${level.responsibility} ${level.when}`;
-const title = () => `${label()} – Škála AI Odpovědnosti. ${level.responsibility} Kliknutím otevřete vysvětlení škály.`;
-const plainText = () => `${label()} – ${stampText()} (${BASE_URL})`;
+const vars = () => ({ label: label(), title: scale.title, url: scale.url, responsibility: level.responsibility, text: stampText() });
+
+function showQuestion() {
+  const from = scale.levels[Math.floor(index / 3)];
+  const to = scale.levels[Math.floor(index / 3) + 1];
+  $("step").textContent = t(ui.questionOf, { n: index + 1, total: questions.length });
+  $("transition").textContent = `${from.n} ${from.name} → ${to.n} ${to.name}`;
+  $("question").textContent = questions[index];
+}
 
 async function drawStamp() {
   stamp = await renderStamp(label(), stampText(), cols);
   $("stamp").src = stamp.toDataURL();
-  for (const b of document.querySelectorAll("#widths button")) b.classList.toggle("active", WIDTHS[b.dataset.w] === cols);
+  for (const b of document.querySelectorAll("#widths button")) b.classList.toggle("active", Number(b.dataset.cols) === cols);
 }
 
 async function finish(n) {
-  level = LEVELS[n];
+  level = scale.levels[n];
   badge = await renderBadge(label());
   $("badge").src = badge.toDataURL();
   $("badge").alt = $("stamp").alt = label();
@@ -51,41 +50,49 @@ const blobToDataUrl = (blob) =>
     reader.readAsDataURL(blob);
   });
 
-// Do schránky jde HTML (Docs, Gmail…), čistý obrázek (aplikace, které berou jen obrázky)
-// a prostý text (pole bez formátování). Cíl vložení si vybere, co umí.
-// Obrázek je data URI: zobrazí se i bez rozšíření a bez načítání z webu. Odkaz na obrázku
-// Google Docs zahodí, proto je volitelně i textový odkaz pod obrázkem.
+// Do schránky jde HTML (Gmail…), čistý obrázek (aplikace, které berou jen obrázky) a prostý text
+// (pole bez formátování). Obrázek je data URI: zobrazí se i bez rozšíření a bez načítání z webu.
 async function copyImage(c) {
   const png = await toBlob(c);
   const { width, height } = cssSize(c);
-  let html =
-    `<a href="${BASE_URL}" title="${title()}">` +
-    `<img src="${await blobToDataUrl(png)}" width="${width}" height="${height}" alt="${label()} – Škála AI Odpovědnosti" title="${title()}">` +
+  const title = t(ui.linkTitle, vars());
+  const html =
+    `<a href="${scale.url}" title="${title}">` +
+    `<img src="${await blobToDataUrl(png)}" width="${width}" height="${height}" alt="${t(ui.altText, vars())}" title="${title}">` +
     `</a>`;
-  if ($("caption").checked) {
-    html += `<br><a href="${BASE_URL}" title="${title()}" style="font-family:'JetBrains Mono','Roboto Mono','Courier New',monospace;font-size:11px;color:#666">${BASE_URL.replace("https://", "")}</a>`;
-  }
   await navigator.clipboard.write([
     new ClipboardItem({
       "text/html": new Blob([html], { type: "text/html" }),
-      "text/plain": new Blob([plainText()], { type: "text/plain" }),
+      "text/plain": new Blob([t(ui.plainText, vars())], { type: "text/plain" }),
       "image/png": png,
     }),
   ]);
 }
 
-function flash(button, text) {
+function flash(button) {
   const original = button.textContent;
-  button.textContent = text;
+  button.textContent = ui.copied;
   setTimeout(() => (button.textContent = original), 1500);
 }
 
-$("yes").onclick = () => (++index === QUESTIONS.length ? finish(3) : showQuestion());
+function useLanguage(lang) {
+  ({ scale, ui } = lang);
+  questions = scale.questions.flat();
+  document.documentElement.lang = lang.code;
+  document.title = $("title").textContent = scale.title;
+  $("version").textContent = `v${scale.scaleVersion}`;
+  applyUi(ui, { title: scale.title, url: scale.url });
+  $("lang").value = lang.code;
+  if (level) finish(level.n); // překreslit výsledek v novém jazyce
+  else showQuestion();
+}
+
+$("yes").onclick = () => (++index === questions.length ? finish(3) : showQuestion());
 $("no").onclick = () => finish(Math.floor(index / 3));
-for (const b of document.querySelectorAll("#widths button")) b.onclick = () => ((cols = WIDTHS[b.dataset.w]), drawStamp());
-$("copy-badge").onclick = (e) => copyImage(badge).then(() => flash(e.target, "Zkopírováno"));
-$("copy-stamp").onclick = (e) => copyImage(stamp).then(() => flash(e.target, "Zkopírováno"));
-$("copy-text").onclick = (e) => navigator.clipboard.writeText(plainText()).then(() => flash(e.target, "Zkopírováno"));
+for (const b of document.querySelectorAll("#widths button")) b.onclick = () => ((cols = Number(b.dataset.cols)), drawStamp());
+$("copy-badge").onclick = (e) => copyImage(badge).then(() => flash(e.target));
+$("copy-stamp").onclick = (e) => copyImage(stamp).then(() => flash(e.target));
+$("copy-text").onclick = (e) => navigator.clipboard.writeText(t(ui.plainText, vars())).then(() => flash(e.target));
 $("restart").onclick = (e) => (e.preventDefault(), restart());
 document.addEventListener("keydown", (e) => {
   if ($("quiz").hidden) return;
@@ -93,4 +100,10 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "n" || e.key === "N") $("no").click();
 });
 
-showQuestion();
+const languages = await availableLanguages();
+for (const l of languages) $("lang").append(new Option(l.name, l.code));
+$("lang").onchange = () => {
+  rememberLanguage($("lang").value);
+  useLanguage(languages.find((l) => l.code === $("lang").value));
+};
+useLanguage(pickLanguage(languages));

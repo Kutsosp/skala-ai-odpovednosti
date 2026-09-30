@@ -6,14 +6,18 @@ Celý dokument: [accountability.md](accountability.md)
 
 ## Odznaky
 
-Ve složce [badges/](badges/) je pro každou úroveň odznak ve dvou variantách, každý jako SVG a PNG (2× rozlišení):
+Ve složce [badges/](badges/) je pro každý jazyk (`badges/cs/`) a úroveň odznak ve dvou variantách, každý jako SVG a PNG (2× rozlišení):
 
 | Varianta | Soubor | Popis |
 |---|---|---|
 | Odznak | `2-overeno.svg`, `2-overeno.png` | Rámeček s názvem úrovně, 158×42 px |
 | Razítko | `2-overeno-full.svg`, `2-overeno-full.png` | Šedé razítko s textem odpovědnosti, 618 px široké |
 
-Text je v SVG převeden na křivky, takže odznaky vypadají stejně bez ohledu na nainstalovaná písma. Generuje je `python3 badges/build.py` (potřebuje `fonttools` a Google Chrome).
+Text je v SVG převeden na křivky, takže odznaky vypadají stejně bez ohledu na nainstalovaná písma. Generuje je `python3 badges/build.py` (potřebuje `fonttools` a Google Chrome) z textů ve složce [scale/](scale/).
+
+## Texty a překlady
+
+Veškeré texty jsou mimo kód: obsah škály (názvy úrovní, odpovědnost, otázky) v [scale/](scale/) a texty rozhraní rozšíření v [extension/locales/](extension/locales/), jeden JSON na jazyk. Nový jazyk = dva soubory a řádek v `scale/index.json`; rozšíření ho nabídne v přepínači jazyka automaticky. Zdrojem pravdy pro češtinu zůstává [accountability.md](accountability.md).
 
 ## Rozšíření pro Chrome
 

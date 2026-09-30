@@ -10,6 +10,8 @@ písma. Rozšíření kreslí tytéž tvary za běhu na canvas (extension/render
 """
 import subprocess
 import sys
+import json
+import shutil
 import tempfile
 import textwrap
 import time
@@ -33,21 +35,7 @@ MIN_H = round(2 * BORDER + 2 * LINE)  # 42
 FULL_COLS = 60  # šířka textu plné varianty; celý odznak 64ch = 616px se vejde na stránku Google Docs
 FULL_W = round(2 * BORDER + (FULL_COLS + 4) * CH)  # 2ch odsazení po stranách jako .disclaimer
 
-# Texty odpovídají tabulce v accountability.md (a extension/scale.js).
-LEVELS = [
-    (0, "PŘEPOSLÁNO", "0-preposlano",
-     "Za nic. Neprováděl/a jsem zásadní změny nebo jsem to nečetl/a.",
-     "Příjemce nemá přístup k LLM nástrojům. V opačném případě si to mohl/a vygenerovat sám/a."),
-    (1, "NÁSTŘEL", "1-nastrel",
-     "Popsaný směr je relevantní. Každé větě rozumím a umím ji říct vlastními slovy.",
-     "Prosím o reakci na směr, ještě než se pustím do ladění detailů."),
-    (2, "OVĚŘENO", "2-overeno",
-     "Znám původ každého čísla a souhlasím s každým tvrzením i závěrem.",
-     "Prosím o reakci na tvrzení a argumenty, ještě než se pustím do ladění formulací, vzhledu a struktury."),
-    (3, "PODEPSÁNO", "3-podepsano",
-     "Za vzhled, strukturu i každou formulaci.",
-     "Pod dokument se podepisuji a považuji ho za hotový."),
-]
+SCALE = ROOT / "scale"  # texty škály, jeden JSON na jazyk; kopírují se do rozšíření
 
 
 def text_path(font, text, size, x, baseline):
@@ -136,18 +124,26 @@ def render(src: Path, png: Path, width, height, scale):
         proc.wait()
 
 
-def emit(slug, markup, w, h):
-    svg_path, png_path = BADGES / f"{slug}.svg", BADGES / f"{slug}.png"
+def emit(out, slug, markup, w, h):
+    svg_path, png_path = out / f"{slug}.svg", out / f"{slug}.png"
     svg_path.write_text(markup, encoding="utf-8")
     render(svg_path, png_path, w, h, 2)
     print(f"{slug}: {w}x{h} svg, {2 * w}x{2 * h} png")
 
 
 def main():
-    for n, name, slug, responsibility, when in LEVELS:
-        emit(slug, minimal_svg(n, name), MIN_W, MIN_H)
-        markup, h = full_svg(n, name, responsibility, when)
-        emit(f"{slug}-full", markup, FULL_W, h)
+    for code in json.loads((SCALE / "index.json").read_text()):
+        scale = json.loads((SCALE / f"{code}.json").read_text(encoding="utf-8"))
+        out = BADGES / code
+        out.mkdir(exist_ok=True)
+        for lv in scale["levels"]:
+            slug = f"{lv['n']}-{lv['slug']}"
+            emit(out, slug, minimal_svg(lv["n"], lv["name"]), MIN_W, MIN_H)
+            markup, h = full_svg(lv["n"], lv["name"], lv["responsibility"], lv["when"])
+            emit(out, f"{slug}-full", markup, FULL_W, h)
+
+    shutil.copytree(SCALE, EXT / "scale", dirs_exist_ok=True, ignore=shutil.ignore_patterns("README.md"))
+    print("scale/ → extension/scale/")
 
     for px in (16, 48, 128):
         icon = EXT / "icons" / f"icon{px}.svg"
