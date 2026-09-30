@@ -33,15 +33,23 @@
 <section id="result" hidden>
   <p class="meta">Váš dokument je na úrovni</p>
   <p><img id="badge" alt=""></p>
-  <div class="disclaimer"><p><span class="stamp" id="stamp"></span><span id="full-text"></span></p></div>
+  <p><img id="stamp" alt=""></p>
 
-  <p class="meta">Kopírovat do schránky jako</p>
+  <p class="meta">Šířka razítka</p>
+  <div class="grid" id="widths">
+    <button data-w="narrow" title="40 znaků na řádek">Úzké</button>
+    <button data-w="medium" title="60 znaků na řádek">Střední</button>
+    <button data-w="wide" title="80 znaků na řádek">Široké</button>
+  </div>
+
+  <p class="meta">Kopírovat do schránky</p>
   <div class="grid">
-    <button id="copy-minimal" title="Malý rámeček s názvem úrovně jako obrázek s odkazem">Odznak</button>
-    <button id="copy-full" title="Razítko s textem odpovědnosti jako text, který se přizpůsobí šířce dokumentu">Razítko</button>
+    <button id="copy-badge" title="Rámeček s názvem úrovně">Odznak</button>
+    <button id="copy-stamp" title="Razítko s textem odpovědnosti">Razítko</button>
     <button id="copy-text" title="Prostý text bez formátování">Text</button>
   </div>
-  <p class="meta">Vložte pomocí ⌘V / Ctrl+V na první řádek dokumentu, e-mailu nebo zprávy. Odznak zůstane viditelný pro každého a po kliknutí otevře vysvětlení škály.</p>
+  <label><input type="checkbox" id="caption" checked> Odkaz na škálu i jako text pod obrázkem</label>
+  <p class="meta">Vložte pomocí ⌘V / Ctrl+V na první řádek dokumentu, e-mailu nebo zprávy. Obrázek se v Google Docs i Gmailu dá zmenšit tažením za rohy. Google Docs zahazuje odkazy na obrázcích, proto textový odkaz pod ním.</p>
   <p><a href="#" id="restart">Začít znovu</a></p>
 </section>
 

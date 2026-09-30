@@ -4,11 +4,10 @@
 Dvě varianty na úroveň: minimální (rámeček s názvem úrovně, jako v ASCII diagramu)
 a plná (šedé razítko s textem odpovědnosti, jako .disclaimer na webu).
 Text je převeden na křivky, takže odznaky vypadají stejně i bez nainstalovaného
-písma. PNG kreslí headless Chrome ze SVG. Spuštění z kořene repozitáře:
+písma. Rozšíření kreslí tytéž tvary za běhu na canvas (extension/render.js). PNG kreslí headless Chrome ze SVG. Spuštění z kořene repozitáře:
 
     python3 badges/build.py
 """
-import shutil
 import subprocess
 import sys
 import tempfile
@@ -141,13 +140,10 @@ def emit(slug, markup, w, h):
     svg_path, png_path = BADGES / f"{slug}.svg", BADGES / f"{slug}.png"
     svg_path.write_text(markup, encoding="utf-8")
     render(svg_path, png_path, w, h, 2)
-    for f in (svg_path, png_path):
-        shutil.copy(f, EXT / "badges" / f.name)  # rozšíření musí být samostatné
     print(f"{slug}: {w}x{h} svg, {2 * w}x{2 * h} png")
 
 
 def main():
-    (EXT / "badges").mkdir(exist_ok=True)
     for n, name, slug, responsibility, when in LEVELS:
         emit(slug, minimal_svg(n, name), MIN_W, MIN_H)
         markup, h = full_svg(n, name, responsibility, when)

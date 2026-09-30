@@ -17,6 +17,6 @@ Text je v SVG převeden na křivky, takže odznaky vypadají stejně bez ohledu 
 
 ## Rozšíření pro Chrome
 
-Složka [extension/](extension/) obsahuje rozšíření, které položí devět otázek ze škály, určí úroveň a zkopíruje odznak do schránky. Odznak se pak vloží (⌘V / Ctrl+V) do Google Docs, e-mailu nebo zprávy jako obrázek s odkazem na tuto stránku; razítko jako orámovaný text, který se zalamuje podle šířky dokumentu.
+Složka [extension/](extension/) obsahuje rozšíření, které položí devět otázek ze škály, určí úroveň a zkopíruje odznak do schránky. Odznak i razítko kreslí rozšíření za běhu písmem JetBrains Mono (razítko ve třech šířkách), takže vypadají všude stejně. Vloží se (⌘V / Ctrl+V) do Google Docs, e-mailu nebo zprávy jako obrázek s odkazem na tuto stránku a v dokumentu se dají zmenšit tažením za rohy. Google Docs odkazy na obrázcích zahazuje, proto rozšíření volitelně přidá textový odkaz pod obrázek.
 
 Instalace: `chrome://extensions` → zapnout *Režim pro vývojáře* → *Načíst rozbalené* → vybrat složku `extension/`.
